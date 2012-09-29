@@ -1,0 +1,237 @@
+/*== Font helpings  ==============================*/
+
+	/* http://p.yusukekamiyamane.com/fonts/ */
+	@font-face {  
+	  font-family: pf_tempesta_seven ;  
+	  src: url( 'fonts/pf_tempesta_seven.ttf' ) format("truetype");  
+	}
+
+/*== Main Containers  ==============================*/
+
+	/*-- Main Container --*/
+		.jInspector{
+			width: 220px;
+			padding: 2px;
+			font-size: 8px;
+			color: #333;
+			font-family: pf_tempesta_seven, monospace;
+			background-color: rgba(150,150,150,0.95);
+			/*position:absolute;*/
+			z-index: 2;
+			position:fixed;
+			right:10px;
+			bottom:10px;
+		}
+	/*-- Sub Containers --*/
+		.jInspector .uiContainer{
+			border-bottom: 1px dotted #555;
+			padding-bottom: 2px;
+			padding-left: 10px;
+			margin-bottom: 4px;
+			/* scrollable */
+			max-height: 120px;
+			overflow:auto;
+		}
+	/*-- Titles --*/
+		.jInspector .uiTitle{
+			border-bottom: 1px dotted #555;
+			padding-bottom: 2px;
+			margin-bottom: 4px;
+		}
+	
+/*== General Styling ==============================*/
+	
+	/*-- Input Styling --*/
+		.jInspector input{
+			font-size:8px;
+			font-family: pf_tempesta_seven, courier, sans serif;
+			line-height: 10px;
+			color: #777;
+			background-color: #eee;
+			border: 0;
+			margin: 0;
+			padding: 0;
+			cursor: pointer;
+			display: inline;
+			-webkit-appearance: none;
+			border-bottom: 1px solid #777;
+		}
+		.jInspector input:focus {
+			outline: none;
+		}
+	
+	/*-- TextArea Styling --*/
+		.jInspector textarea{
+			font-size:8px;
+			font-family: pf_tempesta_seven, courier, sans serif;
+			line-height: 10px;
+			color: #777;
+			background-color: #eee;
+			border: 0;
+			margin: 0;
+			padding: 0;
+			cursor: pointer;
+			display: inline;
+			-webkit-appearance: none;
+			border-bottom: 1px solid #777;
+		}
+		.jInspector textarea:focus {
+			outline: none;
+		}
+		
+/*== Specific Styling ==============================*/
+	
+	/*-- Boolean Styling --*/
+		.jInspector .boolAttr{
+			margin-right : 6px;
+			color: #333;
+		}
+		.jInspector .boolOn{
+			background-color: white
+		}
+	
+	/*-- ID Styling --*/
+		.jInspector .idString{
+			color: white;
+		}
+		.jInspector .idStringLink{
+			color: white;
+			cursor: pointer;
+		}
+		.jInspector .idStringLink:hover{
+			color: rgb(10,250,50);
+		}
+		
+		.jInspector .noChildren{
+			color: white;
+		}
+
+/*== Button Panel ======================================*/
+
+	.jInspector .buttonPanel{
+		height: 20px;
+	}
+	
+	.jInspector .buttonPanel
+	.button{
+		float: left;
+		cursor: pointer;
+	}
+	.jInspector .buttonPanel
+	.button:hover{
+		background-color: rgb(120,120,120);
+	}
+
+/*== Attribute Panel =====================================*/
+
+	.jInspector .attrPanel{
+	}
+	
+	.jInspector .attrPanel
+	.attrTitle{
+		width:60px;
+		float: left;
+		display:inline;
+	}
+	
+	.jInspector .attrPanel
+	input.attrInput{
+		width:70px;
+		margin-right: 4px;
+	}
+	
+	.jInspector .attrPanel
+	input.shortattrInput{
+		width:35px;
+		margin-right: 4px;
+	}
+	.jInspector .attrPanel
+	input.veryshortattrInput{
+		width:25px;
+		margin-right: 4px;
+	}
+	
+	.jInspector .attrPanel
+	.minus{
+		margin-right: 4px;
+		cursor:pointer;
+	}
+	.jInspector .attrPanel
+	.minus:hover{
+		color: white;
+	}
+	
+	.jInspector .attrPanel
+	.plus{
+		margin-right: 4px;
+		cursor:pointer;
+	}
+	.jInspector .attrPanel
+	.plus:hover{
+		color: white;
+	}
+	
+	.jInspector .attrPanel
+	input.increment{
+		width:20px;
+		margin-right: 4px;
+	}
+
+/*== Text Button ====================================*/
+
+	.jInspector
+	.textButton{
+		padding:2px;
+		margin-right: 4px;
+		background-color: white;
+		cursor:pointer;
+	}
+	
+	.jInspector
+	.textButtonRed{
+		padding:2px;
+		color: red;
+		margin-right: 4px;
+		background-color: white;
+		cursor:pointer;
+	}
+
+/*== Icons ====================================*/
+
+	/*-- divider --*/
+		.wickk-icon-div {
+			width: 4px; height: 30px;
+			display: block;
+			background-color: #bbb;
+			margin-left:4px;
+			margin-right:4px;
+		 }
+		
+	/* Icon image -- on ice */
+		.wickk-icon {
+			width: 30px; height: 30px;
+			display: block;
+			text-indent: -99999px;
+			overflow: hidden;
+			background-repeat: no-repeat; 
+			/* background-image: url(images/wickk-sprite.png); */
+		}
+		.wickk-icon-grad {
+			/* background-image: url(images/wickk-sprite-gradient.png); */
+		}
+		.wickk-icon-clean {
+			width: 30px; height: 30px;
+			display: block;
+			text-indent: -99999px;
+			overflow: hidden;
+			background-repeat: no-repeat; 
+			/* background-image: url(images/wickk-sprite.png); */
+		}
+		
+		/* Row 1 */
+		/* .wickk-icon-inspector { background-position: 0 0; } */
+
+
+	
+	
+   

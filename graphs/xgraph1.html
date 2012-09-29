@@ -1,0 +1,183 @@
+<html lang="en"> 
+<head> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="user-scalable=no, width=1000" />
+    <title>Thexel : vcore: demo 1</title>
+     
+	
+	<!-- Thexel src links -->
+	<!-- libs -->
+	<script src="dep/wickk-0.1-dependencies.js"></script>
+	<script src="dep/wickk-0.1.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="css/jUi.css" />
+	
+<!-- Thexel src links -->
+<!-- phycore -->
+<script src="src/graphcore/aNode.js"></script>
+<script src="src/graphcore/aEdge.js"></script>
+<script src="src/graphcore/aGraph.js"></script>
+
+<script src="src/graphcore/xNode.js"></script>
+<script src="src/graphcore/xEdge.js"></script>
+<script src="src/graphcore/xGraph.js"></script>
+	
+	
+	<link rel="stylesheet" type="text/css" href="css/demo.css" />
+	<style type="text/css" > 
+		canvas{
+			border: 1px solid #999;
+		}
+	</style>
+	
+
+<!-- Classes -->
+<script id="clss" type="text/javascript">	
+//-- Using aObj
+</script>
+
+<!-- Script -->
+<script id="script" type="text/javascript">
+
+	//-- Global Instances --------------//
+		var CNVS, CTX;
+		
+		function loop(){
+			CNVS.loopstep();
+			//-- Loop Back
+			setTimeout(loop);
+		};
+		
+		var holder;
+		function loadTest(){
+			holder = new vObjBase();
+			CNVS.addC(holder);
+			
+			loadGraph();
+		}
+		
+		//-- Graph Tests
+		var graph;
+		var p; var p2;
+		function loadGraph(){
+			graph = new xGraph();
+			holder.addC( graph );
+			
+			p = new xNode();
+			graph.addNode( p );
+			
+			p2 = new xNode();
+			p2.pos( vVec(100,100) );
+			graph.addNode( p2 );
+			
+			graph.linkNodes(p, p2);
+		};
+
+		
+	$(function(){
+		//-- Launch
+			launchWickk();
+		
+		//--set up canvas
+			CTX = $('#pad')[0].getContext('2d'); //!-- Should phase this out
+			CNVS = new vCanvas();
+			CNVS.attachToCanvas($('#pad'));
+			CNVS.attachToFps($('#fps'));
+			
+		//-- Initiate the test
+			loadTest();
+			
+		//-- Kick Off!
+			loop();	
+	});
+	
+	//== UI ==================================//
+	
+		function jsonLoad( json ){
+			if(json){
+				aSeed.CMN.Registry.clear(); //-- Clear Registry, Not not needed if using clone..
+				graph = $a.create(json); 	//-- OR = $a.clone(json);
+				holder.addC( graph ); 		//-- Add to the holder
+			} else {
+				jsonClear();
+				graph = new xGraph();
+				holder.addC( graph );
+			}
+		};
+		
+		function jsonClear(){
+			if( graph != null){
+				graph.del();
+				graph = null;	
+			}
+		};
+		
+		$(function(){
+			//-- Wire the state triggers
+			$('#interact').addClass('on');
+			$('#state').children().each(function(){
+				$(this).click(function(){
+					$('#state').children().removeClass('on');
+					$(this).addClass('on');
+					graph.editState($(this).attr('id'));
+				});
+			});
+			//-- Wire for JSON
+			$('#clear').click(function(){ jsonLoad(); });
+			$('#popjsonpretty').click(function(){
+				var w = window.open();
+				$(w.document.body).html('<pre>'+graph.j('\t')+'</pre>');
+			});
+			$('#popjson').click(function(e){
+				var w = window.open();
+				$(w.document.body).html(graph.j());
+			});
+			$('#loadjson').click(function (){
+				var json = $('#jsonEntry').val();
+				$('#jsonEntry').val('');//-- Clear the entry because it seems to bog stuff down
+				jsonClear();
+				jsonLoad(json);
+			});
+			//-- Wire Inspector
+			$('#inspector').click(function(){
+				if(!CNVS.inspector.visible){
+					CNVS.inspector.show();
+					$(this).html('hide');
+				}else{
+					CNVS.inspector.hide();
+					$(this).html('show');
+				}
+			});
+			
+		});
+		
+</script>
+
+	
+</head>
+
+<body>
+
+<!-- UI -->
+	<span id="state">
+	STATE: 
+	<span id="interact">interact</span> |
+	<span id="link">link</span> |
+	<span id="del">delete</span> |
+	</span>
+	JSON:
+	<span id="clear">empty graph</span> |
+	<span id="popjson">pop json</span> |
+	<span id="popjsonpretty">pop json pretty</span> |
+	<input id="jsonEntry" type="text"> |
+	<span id="loadjson">load json</span>  |
+	INSPECTOR:
+	<span id="inspector">show</span>
+
+<!-- Canvas -->
+	<div id="fps">fps</div>
+	<div id="holder"></div> <!-- Holds the Inspector -->
+	<canvas id='pad' width='800' height='600'></canvas>	
+	
+</body> 
+</html> 
