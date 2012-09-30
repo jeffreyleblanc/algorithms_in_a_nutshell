@@ -84,12 +84,14 @@
 					Q.getLinkingEdgeByIdx(n_idx, filter);
 			},
 			
+			//! FIXED ERROR HERE SHOULD FIX IN PHYCORE
 			getLinkingEdgeByPtr : function(n){var Q=this;
 				if(!n) return null;if(n==Q)return null;
 				var resulte = null;
 				Q.U.edges.each( function(i,e){
-					if( e.has(n) )
+					if( e.has(n) ){
 						resulte = e; return false; //-- Force exit
+					}
 				});
 				return resulte;
 			},

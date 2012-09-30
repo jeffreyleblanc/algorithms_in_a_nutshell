@@ -20,6 +20,10 @@
 	<!-- Analyzers -->
 	<script src="src/graphcore/depthFirstSearch.js"></script>
 	<script src="src/graphcore/breadthFirstSearch.js"></script>
+
+	<script src="src/graphcore/PriorityQueue.js"></script>
+
+	<script src="src/graphcore/dijsktraPQ.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href="css/demo.css" />
 
@@ -141,6 +145,9 @@
 			$('#bfs').click(function(){
 				breadthFirstSearch( graph, graph.focus );
 			});
+			$('#dPQ').click(function(){
+				dijsktraPQ( graph, graph.focus, null );
+			});
 			
 		});
 		
@@ -169,7 +176,8 @@
 
 	<br>
 	<span id="dfs">DFS</span> | 
-	<span id="bfs">BFS</span>
+	<span id="bfs">BFS</span> | 
+	<span id="dPQ">DijisktraPQ</span>
 
 <!-- Canvas -->
 	<div id="fps">fps</div>
