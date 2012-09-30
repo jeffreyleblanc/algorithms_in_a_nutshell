@@ -18,7 +18,7 @@ function dijsktraPQ( graph, s, e ){
 	});
 	
 	while( ! PQ.empty() ){
-		var u = PQ.popMin(); //PQ.min();
+		var u = PQ.popMin();
 		N = u.getLinkedNodes();
 		$.each( N, function(i,v){
 			
