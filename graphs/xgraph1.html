@@ -2,39 +2,25 @@
 <head> 
     <meta charset="utf-8" />
     <meta name="viewport" content="user-scalable=no, width=1000" />
-    <title>Thexel : vcore: demo 1</title>
+    <title>Algorithims : nutshell</title>
      
-	
-	<!-- Thexel src links -->
-	<!-- libs -->
+	<!-- Wickk src links -->
 	<script src="dep/wickk-0.1-dependencies.js"></script>
 	<script src="dep/wickk-0.1.min.js"></script>
-
 	<link rel="stylesheet" type="text/css" href="css/jUi.css" />
 	
-<!-- Thexel src links -->
-<!-- phycore -->
-<script src="src/graphcore/aNode.js"></script>
-<script src="src/graphcore/aEdge.js"></script>
-<script src="src/graphcore/aGraph.js"></script>
+	<!-- Graph src links -->
+	<script src="src/graphcore/aNode.js"></script>
+	<script src="src/graphcore/aEdge.js"></script>
+	<script src="src/graphcore/aGraph.js"></script>
+	<script src="src/graphcore/xNode.js"></script>
+	<script src="src/graphcore/xEdge.js"></script>
+	<script src="src/graphcore/xGraph.js"></script>
 
-<script src="src/graphcore/xNode.js"></script>
-<script src="src/graphcore/xEdge.js"></script>
-<script src="src/graphcore/xGraph.js"></script>
-	
+	<!-- Analyzers -->
+	<script src="src/graphcore/depthFirstSearch.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href="css/demo.css" />
-	<style type="text/css" > 
-		canvas{
-			border: 1px solid #999;
-		}
-	</style>
-	
-
-<!-- Classes -->
-<script id="clss" type="text/javascript">	
-//-- Using aObj
-</script>
 
 <!-- Script -->
 <script id="script" type="text/javascript">
@@ -44,7 +30,6 @@
 		
 		function loop(){
 			CNVS.loopstep();
-			//-- Loop Back
 			setTimeout(loop);
 		};
 		
@@ -52,7 +37,6 @@
 		function loadTest(){
 			holder = new vObjBase();
 			CNVS.addC(holder);
-			
 			loadGraph();
 		}
 		
@@ -148,6 +132,11 @@
 					$(this).html('show');
 				}
 			});
+
+			// WIRE ANALYSIS
+			$('#dfs').click(function(){
+				depthFirstSearch( graph, graph.focus );
+			})
 			
 		});
 		
@@ -173,6 +162,9 @@
 	<span id="loadjson">load json</span>  |
 	INSPECTOR:
 	<span id="inspector">show</span>
+
+	<br>
+	<span id="dfs">DFS</span>
 
 <!-- Canvas -->
 	<div id="fps">fps</div>

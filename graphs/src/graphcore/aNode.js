@@ -20,6 +20,15 @@
 					Q.U.edges = new aList();
 				//-- Pointer to Controller
 					Q.U.graph = null; //-- Pointer to graph
+
+				//-- ANALYSIS TOOLS
+
+					Q.pred = null;//-1;
+					Q.discovered = -1;
+					Q.finished = -1;
+					Q.color = '-'; //'W', 'G', 'K'
+
+					Q.a_id = Q.$class.$count;
 			},
 			
 			//?-- Delete Children Option?
