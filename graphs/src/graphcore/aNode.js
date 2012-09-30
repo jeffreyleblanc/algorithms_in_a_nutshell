@@ -28,6 +28,8 @@
 					Q.finished = -1;
 					Q.color = '-'; //'W', 'G', 'K'
 
+					Q.dist = 0;
+
 					Q.a_id = Q.$class.$count;
 			},
 			

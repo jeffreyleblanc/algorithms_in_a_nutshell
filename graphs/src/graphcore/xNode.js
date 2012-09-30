@@ -87,10 +87,20 @@
 
 				// Render Text
 				this.ctx.fillStyle = 'White';
+
+				/*
+				//Depth First
 				if( Q.pred == null )
 					Q.ctx.fillText(Q.a_id+ ' # '+Q.finished,0,0);
 				else
 					Q.ctx.fillText(Q.a_id+' > '+Q.pred.a_id+ ' # '+Q.finished,0,0);
+				*/
+
+				// Breadth First
+				if( Q.pred == null )
+					Q.ctx.fillText(Q.a_id+ ' # '+Q.dist,0,0);
+				else
+					Q.ctx.fillText(Q.a_id+' > '+Q.pred.a_id+ ' # '+Q.dist,0,0);
 
 			},
 			

@@ -19,6 +19,7 @@
 
 	<!-- Analyzers -->
 	<script src="src/graphcore/depthFirstSearch.js"></script>
+	<script src="src/graphcore/breadthFirstSearch.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href="css/demo.css" />
 
@@ -136,7 +137,10 @@
 			// WIRE ANALYSIS
 			$('#dfs').click(function(){
 				depthFirstSearch( graph, graph.focus );
-			})
+			});
+			$('#bfs').click(function(){
+				breadthFirstSearch( graph, graph.focus );
+			});
 			
 		});
 		
@@ -164,7 +168,8 @@
 	<span id="inspector">show</span>
 
 	<br>
-	<span id="dfs">DFS</span>
+	<span id="dfs">DFS</span> | 
+	<span id="bfs">BFS</span>
 
 <!-- Canvas -->
 	<div id="fps">fps</div>
