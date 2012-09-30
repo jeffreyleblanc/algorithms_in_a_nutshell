@@ -16,14 +16,17 @@
 	<script src="src/graphcore/xNode.js"></script>
 	<script src="src/graphcore/xEdge.js"></script>
 	<script src="src/graphcore/xGraph.js"></script>
-
-	<!-- Analyzers -->
-	<script src="src/graphcore/depthFirstSearch.js"></script>
-	<script src="src/graphcore/breadthFirstSearch.js"></script>
-	<script src="src/graphcore/PriorityQueue.js"></script>
-	<script src="src/graphcore/dijsktraPQ.js"></script>
-	<script src="src/graphcore/BellmanFord.js"></script>
-	<script src="src/graphcore/primMST.js"></script>
+	<!-- DataStructures -->
+	<script src="src/datastructures/Queue.js"></script>
+	<script src="src/datastructures/PriorityQueue.js"></script>
+	<!-- Algorithms -->
+	<script src="src/algorithms/depthFirstSearch.js"></script>
+	<script src="src/algorithms/breadthFirstSearch.js"></script>
+	<script src="src/algorithms/dijsktraPQ.js"></script>
+	<script src="src/algorithms/BellmanFord.js"></script>
+	<script src="src/algorithms/primMST.js"></script>
+	<!-- Data -->
+	<script src="src/data/graph1.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href="css/demo.css" />
 
@@ -138,6 +141,12 @@
 				}
 			});
 
+			// Load Temp
+			$('#example').click(function(){
+				jsonClear();
+				jsonLoad( graph1 );
+			});
+
 			// WIRE ANALYSIS
 			$('#dfs').click(function(){
 				depthFirstSearch( graph, graph.focus );
@@ -181,6 +190,7 @@
 	<span id="inspector">show</span>
 
 	<br>
+	<span id="example">ExampleGraph</span> | 
 	<span id="dfs">DFS</span> | 
 	<span id="bfs">BFS</span> | 
 	<span id="dPQ">DijisktraPQ</span> | 
