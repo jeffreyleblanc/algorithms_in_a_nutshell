@@ -23,6 +23,7 @@
 	<script src="src/graphcore/PriorityQueue.js"></script>
 	<script src="src/graphcore/dijsktraPQ.js"></script>
 	<script src="src/graphcore/BellmanFord.js"></script>
+	<script src="src/graphcore/primMST.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href="css/demo.css" />
 
@@ -150,6 +151,9 @@
 			$('#bf').click(function(){
 				bellmanFord( graph, graph.focus );
 			});
+			$('#mst').click(function(){
+				primMST( graph );
+			});
 			
 		});
 		
@@ -180,7 +184,8 @@
 	<span id="dfs">DFS</span> | 
 	<span id="bfs">BFS</span> | 
 	<span id="dPQ">DijisktraPQ</span> | 
-	<span id="bf">BellmanFord</span>
+	<span id="bf">BellmanFord</span> |
+	<span id="mst">primMST</span>
 
 <!-- Canvas -->
 	<div id="fps">fps</div>

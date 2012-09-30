@@ -13,6 +13,7 @@ function bellmanFord( graph, s ){
 	});
 	s.dist = 0;
 
+	//! check implementation
 	var n = V.length;
 	for( var i=1; i<n; i++ ){
 		$.C( 'pass : '+ i);
