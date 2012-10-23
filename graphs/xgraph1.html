@@ -25,6 +25,7 @@
 	<script src="src/algorithms/dijsktraPQ.js"></script>
 	<script src="src/algorithms/BellmanFord.js"></script>
 	<script src="src/algorithms/primMST.js"></script>
+	<script src="src/algorithms/FloydWarshall.js"></script>
 	<!-- Data -->
 	<script src="src/data/graph1.js"></script>
 	
@@ -163,6 +164,9 @@
 			$('#mst').click(function(){
 				primMST( graph );
 			});
+			$('#fw').click(function(){
+				FloydWarshall( graph );
+			});
 			
 		});
 		
@@ -196,6 +200,7 @@
 	<span id="dPQ">DijisktraPQ</span> | 
 	<span id="bf">BellmanFord</span> |
 	<span id="mst">primMST</span>
+	<span id="fw">FloydWarshall</span>
 
 <!-- Canvas -->
 	<div id="fps">fps</div>

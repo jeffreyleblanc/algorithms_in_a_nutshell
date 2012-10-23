@@ -77,6 +77,42 @@
 				});
 				return L;
 			},
+
+			/* TEST > */
+
+			//--  n1---n2, '-', '<', '>', '|'
+
+			// n1
+
+			getLinkedNodesOut : function(){var Q=this;
+				var L = [];
+				Q.U.edges.each( function(i,e){
+					var tmpN = e.n1();
+					$.C( e.dir() );
+					$.C( tmpN.id() );
+					if( 
+						( tmpN == Q && ( e.dir() == '-' || e.dir() == '>')) ||
+						( tmpN != Q && ( e.dir() == '-' || e.dir() == '<'))
+					){
+						L.push( e.getOther(Q) ); }
+				});
+				return L;
+			},
+
+			getLinkedNodesIn : function(){var Q=this;
+				var L = [];
+				Q.U.edges.each( function(i,e){
+					var tmpN = e.n1();
+					if( 
+						( tmpN == Q && ( e.dir() == '-' || e.dir() == '<')) ||
+						( tmpN != Q && ( e.dir() == '-' || e.dir() == '>'))
+					){
+						L.push( e.getOther(Q) ); }
+				});
+				return L;
+			},
+
+			/* < TEST */
 			
 			getLinkingEdge : function(n_idx, filter){var Q=this;
 				return ($.ISatype(n_idx))?
