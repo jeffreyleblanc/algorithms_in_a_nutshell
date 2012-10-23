@@ -19,6 +19,7 @@
 	<!-- DataStructures -->
 	<script src="src/datastructures/Queue.js"></script>
 	<script src="src/datastructures/PriorityQueue.js"></script>
+	<script src="src/datastructures/Matrix.js"></script>
 	<!-- Algorithms -->
 	<script src="src/algorithms/depthFirstSearch.js"></script>
 	<script src="src/algorithms/breadthFirstSearch.js"></script>
@@ -167,6 +168,32 @@
 			$('#fw').click(function(){
 				FloydWarshall( graph );
 			});
+
+			$('#set_sink').click(function(){
+				if( graph.focus != null )
+					graph.s = graph.focus;
+			});
+			$('#set_target').click(function(){
+				if( graph.focus != null )
+					graph.t = graph.focus;
+			});
+			$('#path').click(function(){
+				if( graph.t != null && graph.s != null ){
+					var path = graph.getPathBetween( graph.s, graph.t );
+					$.each( path.nodes, function(k,v){
+						$.C( v.a_id );
+					});
+					$.each( path.edges, function(k,e){
+						$.C( e.id() );
+						e.color.RGBA(255,255,0,0.75);
+					});
+				}
+			});
+			$('#reset_color').click(function(){
+				graph.eachEdges( function(i,e){
+					e.color.RGBA(50,100,100,0.5);
+				});
+			});
 			
 		});
 		
@@ -199,8 +226,12 @@
 	<span id="bfs">BFS</span> | 
 	<span id="dPQ">DijisktraPQ</span> | 
 	<span id="bf">BellmanFord</span> |
-	<span id="mst">primMST</span>
-	<span id="fw">FloydWarshall</span>
+	<span id="mst">primMST</span> | 
+	<span id="fw">FloydWarshall</span> || 
+	<span id="set_sink">sink</span> |
+	<span id="set_target">target</span> |
+	<span id="path">PATH!</span> |
+	<span id="reset_color">Reset Color</span>
 
 <!-- Canvas -->
 	<div id="fps">fps</div>

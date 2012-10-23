@@ -88,8 +88,6 @@
 				var L = [];
 				Q.U.edges.each( function(i,e){
 					var tmpN = e.n1();
-					$.C( e.dir() );
-					$.C( tmpN.id() );
 					if( 
 						( tmpN == Q && ( e.dir() == '-' || e.dir() == '>')) ||
 						( tmpN != Q && ( e.dir() == '-' || e.dir() == '<'))

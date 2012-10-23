@@ -18,6 +18,33 @@
 				//-- Particle and Spring Containers
 					Q.U.edges = null;
 					Q.U.nodes = null;
+
+				//-- Analysis
+					Q.indexToPtr = []; //
+					Q.predMatrix = null;
+					Q.distMatrix = null;
+			},
+
+			getPathBetween : function( s, t){var Q=this;
+				var s_id = s.a_id;
+				var t_id = t.a_id;
+
+				var npath = []	// save the nodes we travese
+				var epath = []; // save the edges we traverse
+
+				npath.push( t );
+				while( t != s ){
+					t_id = Q.predMatrix[s.a_id][t.a_id];
+					if( t_id == -1 ) return null;
+					var tmpE = t.getLinkingEdgeByPtr( Q.indexToPtr[t_id] );
+					t = Q.indexToPtr[t_id];
+					npath.push( Q.indexToPtr[t_id]);
+					epath.push( tmpE);
+				}
+				return {
+					'nodes' : npath,
+					'edges' : epath
+				};
 			},
 			
 			postInitialize : function(){var Q=this;
