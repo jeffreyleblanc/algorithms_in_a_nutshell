@@ -33,6 +33,7 @@
 					Q.a_id = Q.$class.$count;
 
 					Q.I = null; // for FordFulkerson path search
+					Q.Idir = undefined; // For FordFulkerson search
 			},
 			
 			//?-- Delete Children Option?
