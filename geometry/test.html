@@ -1,0 +1,166 @@
+<html lang="en"> 
+<head> 
+    <meta charset="utf-8" />
+    <meta name="viewport" content="user-scalable=no, width=1000" />
+    <title>Algorithims : nutshell</title>
+     
+	<!-- Wickk src links -->
+	<script src="dep/wickk-0.1-dependencies.js"></script>
+	<script src="dep/wickk-0.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/jUi.css" />
+	
+	<!-- plane src links -->
+	<script src="src/geocore/xPlane.js"></script>
+	<script src="src/geocore/xPoint.js"></script>
+	<!-- DataStructures -->
+		<script src="src/datastructures/SelectSort.js"></script>
+		<!--
+		<script src="src/datastructures/KDNode.js"></script>
+		<script src="src/datastructures/KDTree.js"></script>
+		-->
+	<!-- Algorithms -->
+	<script src="src/algorithms/ConvexHull.js"></script>
+	<!-- Data -->
+	<script src="src/data/plane1.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="css/demo.css" />
+
+<!-- Script -->
+<script id="script" type="text/javascript">
+
+	//-- Global Instances --------------//
+		var CNVS, CTX;
+		
+		function loop(){
+			CNVS.loopstep();
+			setTimeout(loop);
+		};
+		
+		var holder;
+		function loadTest(){
+			holder = new vObjBase();
+			CNVS.addC(holder);
+			loadplane();
+		}
+		
+		//-- plane Tests
+		var plane;
+		function loadplane(){
+			plane = new xPlane();
+			holder.addC( plane );
+		};
+
+		
+	$(function(){
+		//-- Launch
+			launchWickk();
+		
+		//--set up canvas
+			CTX = $('#pad')[0].getContext('2d'); //!-- Should phase this out
+			CNVS = new vCanvas();
+			CNVS.attachToCanvas($('#pad'));
+			CNVS.attachToFps($('#fps'));
+			
+		//-- Initiate the test
+			loadTest();
+			
+		//-- Kick Off!
+			loop();	
+	});
+	
+	//== UI ==================================//
+	
+		function jsonLoad( json ){
+			if(json){
+				aSeed.CMN.Registry.clear(); //-- Clear Registry, Not not needed if using clone..
+				plane = $a.create(json); 	//-- OR = $a.clone(json);
+				holder.addC( plane ); 		//-- Add to the holder
+			} else {
+				jsonClear();
+				plane = new xPlane();
+				holder.addC( plane );
+			}
+		};
+		
+		function jsonClear(){
+			if( plane != null){
+				plane.del();
+				plane = null;	
+			}
+		};
+		
+		$(function(){
+			//-- Wire for JSON
+			$('#clear').click(function(){ jsonLoad(); });
+			$('#popjsonpretty').click(function(){
+				var w = window.open();
+				$(w.document.body).html('<pre>'+plane.j('\t')+'</pre>');
+			});
+			$('#popjson').click(function(e){
+				var w = window.open();
+				$(w.document.body).html(plane.j());
+			});
+			$('#loadjson').click(function (){
+				var json = $('#jsonEntry').val();
+				$('#jsonEntry').val('');//-- Clear the entry because it seems to bog stuff down
+				jsonClear();
+				jsonLoad(json);
+			});
+			//-- Wire Inspector
+			$('#inspector').click(function(){
+				if(!CNVS.inspector.visible){
+					CNVS.inspector.show();
+					$(this).html('hide');
+				}else{
+					CNVS.inspector.hide();
+					$(this).html('show');
+				}
+			});
+
+			// Load Temp
+			$('#example').click(function(){
+				jsonClear();
+				jsonLoad( plane1 );
+			});
+
+			// WIRE ANALYSIS
+			$('#convexhull').click(function(){
+				ConvexHull( plane );
+			});
+
+		});
+		
+</script>
+
+	
+</head>
+
+<body>
+
+<!-- UI -->
+	<span id="state">
+	STATE: 
+	<span id="interact">interact</span> |
+	<span id="link">link</span> |
+	<span id="del">delete</span> |
+	</span>
+	JSON:
+	<span id="clear">empty plane</span> |
+	<span id="popjson">pop json</span> |
+	<span id="popjsonpretty">pop json pretty</span> |
+	<input id="jsonEntry" type="text"> |
+	<span id="loadjson">load json</span>  |
+	INSPECTOR:
+	<span id="inspector">show</span>
+
+	<br>
+	<span id="example">Exampleplane</span> | 
+	<span id="convexhull">ConvexHull</span>
+
+<!-- Canvas -->
+	<div id="fps">fps</div>
+	<div id="holder"></div> <!-- Holds the Inspector -->
+	<canvas id='pad' width='800' height='600'></canvas>	
+	
+</body> 
+</html> 
