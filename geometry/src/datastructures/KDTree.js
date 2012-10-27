@@ -3,6 +3,8 @@
 * |^| copyright 2012 by Jeffrey LeBlanc LLC. |v|
 */
 
+// http://en.wikipedia.org/wiki/K-d_tree
+
 
 function generateKDTree( points ){
 
@@ -71,13 +73,14 @@ function generate( d, maxD, points, left, right, comparators){
 	// Order the array[left,right] so the mth element will be the median
 	// and the elements prior to it will be <=, though they won't neccessarily
 	// be sorted; similarly, the elements afer will all be >=
-	var m = Math.floor(1+(right-left)/2);
+	///var m = Math.floor(1+(right-left)/2);
+	var m = left+Math.floor(1+(right-left)/2);
 	//splitaboutKth( A, l, r, k, cmpf )
 	splitaboutKth( points, left, right, m, comparators[d-1] ); // This function must be defined.... see above
 
 	// Median point on this dimension becomes parent
-	//var dm = new KDNode().i( d, points[left+m-1]);
-	var dm = new KDNode().i( d, points[left+m-1]);
+	///var dm = new KDNode().i( d, points[left+m-1]);
+	var dm = new KDNode().i( d, points[m]);
 
 	// Update to the next dimension, or reset back to 1
 	d += 1;
@@ -86,12 +89,12 @@ function generate( d, maxD, points, left, right, comparators){
 	// recursively compute the left and right sub-trees, which translate
 	// into 'below' and 'above' for n-dimensions
 	dm.setBelow(
-		//maxD, generate( d, maxD, points, left, left+m-2, comparators )
-		generate( d, maxD, points, left, left+m-2, comparators )
+		///generate( d, maxD, points, left, left+m-2, comparators )
+		generate( d, maxD, points, left, m-1, comparators )
 	);
 	dm.setAbove(
-		//maxD, generate( d, maxD, points, left+m, right, comparators )
-		generate( d, maxD, points, left+m, right, comparators )
+		//generate( d, maxD, points, left+m, right, comparators )
+		generate( d, maxD, points, m+1, right, comparators )
 	);
 	return dm;
 

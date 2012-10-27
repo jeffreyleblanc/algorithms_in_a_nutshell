@@ -35,6 +35,8 @@
 				Q.dimension = dim;
 				Q.point = pnt;
 
+				pnt.kdnode = Q; // backward assign;
+
 				return Q;
 			},
 

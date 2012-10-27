@@ -25,6 +25,7 @@
 					Q.idx_ = 0;
 
 					Q.hull = null;
+					Q.kdtree = null;
 			},
 			
 			postInitialize : function(){var Q=this;
@@ -86,8 +87,123 @@
 					Q.renderInspectorTag();
 
 					Q.renderHull();
+
+					Q.renderKDTree();
 			},
 			
+			renderKDTree : function(){var Q=this;
+				if( Q.kdtree == null) return;
+
+				/*$.each( Q.U.points.cO.L, function(k,p){
+
+					if( p.kdnode != undefined ){
+
+						if( p.kdnode.dimension == 1 ){
+							if( Q.kdtree.root == p.kdnode ){
+								var x = p.pos().x;
+								Q.rndr.line(vVec(x,0),vVec(x,1000),'red',2);
+							}
+							
+						}else{
+							if( Q.kdtree.root == p.kdnode ){
+								var y = p.pos().y;
+								Q.rndr.line(vVec(0,y),vVec(1000,y),'blue',2);
+							}
+						}
+
+					}else{
+						$.C('not defined');
+					}
+
+
+				});*/
+				Q.renderKDNode( Q.kdtree.root, null, false );
+			},
+
+			renderKDNode : function( p, pn, isAbove ){var Q=this;
+
+				if( p==undefined || p==null ) return;
+
+				var xMin = 0;
+				var xMax = 1000;
+				var yMin = 0;
+				var yMax = 1000;
+				if( pn == null ){
+					if( p.dimension == 1 )
+					{	xMin = xMax = p.point.pos().x; }
+					else
+					{	yMin = yMax = p.point.pos().y; }
+				}else{
+					if( p.dimension == 1 )
+					{ xMin = xMax = p.point.pos().x;}
+					else
+					{ yMin = yMax = p.point.pos().y;}
+
+					if( isAbove){
+						if( p.dimension == 1 )
+						{	yMin = pn.point.pos().y; }
+						else
+						{	xMin = pn.point.pos().x; }
+					}else{
+						if( p.dimension == 1 )
+						{	yMax = pn.point.pos().y; }
+						else
+						{	xMax = pn.point.pos().x; }
+					}
+				}
+
+				// Iterate
+				Q.renderKDNode( p.above, p, true );
+				Q.renderKDNode( p.below, p, false );
+
+				//Draw it:
+				Q.rndr.line(vVec(xMin,yMin),vVec(xMax,yMax),(p.dimension==1?'red':'blue'),2);
+
+			},
+
+			/*
+						renderKDTree : function(){var Q=this;
+				if( Q.kdtree == null) return;
+
+				$.each( Q.U.points.cO.L, function(k,p){
+
+					if( p.kdnode != undefined ){
+
+						if( p.kdnode.dimension == 1 ){
+							var u = 1000;
+							var d = 0;
+							if( p.kdnode.below != null ){
+								d = p.kdnode.below.point.pos().y;
+							}
+							if( p.kdnode.above != null ){
+								u = p.kdnode.above.point.pos().y;
+							}
+							var x = p.pos().x;
+							//Q.rndr.line(p.pos(),p.pos().addN(vVec(20,0)),'blue',2);
+							Q.rndr.line(vVec(x,u),vVec(x,d),'blue',2);
+						}else{
+							var l = 0;
+							var r = 1000;
+							if( p.kdnode.below != null ){
+								l = p.kdnode.below.point.pos().x;
+							}
+							if( p.kdnode.above != null ){
+								r = p.kdnode.above.point.pos().x;
+							}
+							var y = p.pos().y;
+							//Q.rndr.line(p.pos(),p.pos().addN(vVec(20,0)),'blue',2);
+							Q.rndr.line(vVec(l,y),vVec(r,y),'red',2);
+						}
+
+					}else{
+						$.C('not defined');
+					}
+
+
+				});
+			},
+			*/
+
 			renderHull : function(){var Q=this;
 				if( Q.hull == null ) return;
 
