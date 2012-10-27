@@ -42,44 +42,19 @@ function generateKDTree( points ){
 	return tree;
 };
 
-// ! this is not really select, really its balancing about the median index m
-// see pages 70-71 of the book
-// this also looks the result of the selectKth function in python at:
-// https://github.com/jeffreyleblanc/algorithms_in_a_nutshell/blob/master/sorting/median.py
-function select( points, m, left, right, comparator ){
-
-
-};
-
 function generate( d, maxD, points, left, right, comparators){
-
-	$.C("CALLEd!");
 
 	// Handle simple cases
 	if( right < left ) return null;
 	if( right == left ) return new KDNode().i( d, points[left] );
 
-	// TEST WE HAVE A compatator!
-	$.C('cmpf:');
-	$.C(d);
-	$.C( comparators[d-1] );
-
-	//PRINT THE POINTS WE HAVE!
-	$.each( points, function(k,p){
-		$.C('-- '+p.a_id);
-	});
-
-
 	// Order the array[left,right] so the mth element will be the median
 	// and the elements prior to it will be <=, though they won't neccessarily
 	// be sorted; similarly, the elements afer will all be >=
-	///var m = Math.floor(1+(right-left)/2);
 	var m = left+Math.floor((1+right-left)/2);
-	//splitaboutKth( A, l, r, k, cmpf )
-	splitaboutKth( points, left, right, m, comparators[d-1] ); // This function must be defined.... see above
+	splitaboutKth( points, left, right, m, comparators[d-1] );
 
 	// Median point on this dimension becomes parent
-	///var dm = new KDNode().i( d, points[left+m-1]);
 	var dm = new KDNode().i( d, points[m]);
 
 	// Update to the next dimension, or reset back to 1
@@ -89,11 +64,9 @@ function generate( d, maxD, points, left, right, comparators){
 	// recursively compute the left and right sub-trees, which translate
 	// into 'below' and 'above' for n-dimensions
 	dm.setBelow(
-		///generate( d, maxD, points, left, left+m-2, comparators )
 		generate( d, maxD, points, left, m-1, comparators )
 	);
 	dm.setAbove(
-		//generate( d, maxD, points, left+m, right, comparators )
 		generate( d, maxD, points, m+1, right, comparators )
 	);
 	return dm;

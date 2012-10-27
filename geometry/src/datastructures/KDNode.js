@@ -16,8 +16,6 @@
 			initialize : function(a){var Q=this;
 				Q.$super();
 				
-				$.C('MAKE!!!!');
-
 				Q.point = null; // xPoint
 				Q.dimension = 2; // hard coded!
 				Q.max = undefined;	// int

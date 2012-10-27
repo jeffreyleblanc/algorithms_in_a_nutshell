@@ -82,41 +82,15 @@
 		//-- Render --------------------------------//
 			
 			render : function(){ var Q=this;
-
 				//-- Render the inspector hook 'square'
 					Q.renderInspectorTag();
-
-					Q.renderHull();
-
-					Q.renderKDTree();
+				
+				Q.renderHull();
+				Q.renderKDTree();
 			},
 			
 			renderKDTree : function(){var Q=this;
 				if( Q.kdtree == null) return;
-
-				/*$.each( Q.U.points.cO.L, function(k,p){
-
-					if( p.kdnode != undefined ){
-
-						if( p.kdnode.dimension == 1 ){
-							if( Q.kdtree.root == p.kdnode ){
-								var x = p.pos().x;
-								Q.rndr.line(vVec(x,0),vVec(x,1000),'red',2);
-							}
-							
-						}else{
-							if( Q.kdtree.root == p.kdnode ){
-								var y = p.pos().y;
-								Q.rndr.line(vVec(0,y),vVec(1000,y),'blue',2);
-							}
-						}
-
-					}else{
-						$.C('not defined');
-					}
-
-
-				});*/
 				Q.renderKDNode( Q.kdtree.root, null, false, 0, 1000, 0, 1000 );
 			},
 
@@ -128,27 +102,23 @@
 				var xMax = _xMax;
 				var yMin = _yMin;
 				var yMax = _yMax;
-				if( pn == null ){
-					if( p.dimension == 1 )
-					{	xMin = xMax = p.point.pos().x; }
-					else
-					{	yMin = yMax = p.point.pos().y; }
-				}else{
-					if( p.dimension == 1 )
-					{ xMin = xMax = p.point.pos().x;}
-					else
-					{ yMin = yMax = p.point.pos().y;}
 
+				if( p.dimension == 1 )
+					xMin = xMax = p.point.pos().x;
+				else
+					yMin = yMax = p.point.pos().y;
+
+				if( pn != null ){
 					if( isAbove){
 						if( p.dimension == 1 )
-						{	yMin = pn.point.pos().y; }
+							yMin = pn.point.pos().y;
 						else
-						{	xMin = pn.point.pos().x; }
+							xMin = pn.point.pos().x;
 					}else{
 						if( p.dimension == 1 )
-						{	yMax = pn.point.pos().y; }
+							yMax = pn.point.pos().y;
 						else
-						{	xMax = pn.point.pos().x; }
+							xMax = pn.point.pos().x;
 					}
 				}
 
@@ -165,49 +135,6 @@
 				Q.rndr.line(vVec(xMin,yMin),vVec(xMax,yMax),(p.dimension==1?'red':'blue'),2);
 
 			},
-
-			/*
-						renderKDTree : function(){var Q=this;
-				if( Q.kdtree == null) return;
-
-				$.each( Q.U.points.cO.L, function(k,p){
-
-					if( p.kdnode != undefined ){
-
-						if( p.kdnode.dimension == 1 ){
-							var u = 1000;
-							var d = 0;
-							if( p.kdnode.below != null ){
-								d = p.kdnode.below.point.pos().y;
-							}
-							if( p.kdnode.above != null ){
-								u = p.kdnode.above.point.pos().y;
-							}
-							var x = p.pos().x;
-							//Q.rndr.line(p.pos(),p.pos().addN(vVec(20,0)),'blue',2);
-							Q.rndr.line(vVec(x,u),vVec(x,d),'blue',2);
-						}else{
-							var l = 0;
-							var r = 1000;
-							if( p.kdnode.below != null ){
-								l = p.kdnode.below.point.pos().x;
-							}
-							if( p.kdnode.above != null ){
-								r = p.kdnode.above.point.pos().x;
-							}
-							var y = p.pos().y;
-							//Q.rndr.line(p.pos(),p.pos().addN(vVec(20,0)),'blue',2);
-							Q.rndr.line(vVec(l,y),vVec(r,y),'red',2);
-						}
-
-					}else{
-						$.C('not defined');
-					}
-
-
-				});
-			},
-			*/
 
 			renderHull : function(){var Q=this;
 				if( Q.hull == null ) return;
