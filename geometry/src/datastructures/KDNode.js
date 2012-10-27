@@ -38,6 +38,18 @@
 				return Q;
 			},
 
+			dump : function(){var Q=this;
+				$.C('-N->');
+					if( Q.point != null )
+						$.C('point: '+Q.point.a_id);
+					$.C('dim: '+Q.dimension);
+					$.C('above: '+ ((Q.above!=null)?Q.above.point.a_id:'null'));
+					$.C('below: '+ ((Q.below!=null)?Q.below.point.a_id:'null'));
+				$.C('-N-<');
+				if(Q.above!=null)Q.above.dump();
+				if(Q.below!=null)Q.below.dump();
+			},
+
 			getBelow : function(){
 				return this.below;
 			},

@@ -55,7 +55,7 @@ function generate( d, maxD, points, left, right, comparators){
 
 	// Handle simple cases
 	if( right < left ) return null;
-	if( right == left ) return new KDNode( points[left] );
+	if( right == left ) return new KDNode().i( d, points[left] );
 
 	// TEST WE HAVE A compatator!
 	$.C('cmpf:');
@@ -76,6 +76,7 @@ function generate( d, maxD, points, left, right, comparators){
 	splitaboutKth( points, left, right, m, comparators[d-1] ); // This function must be defined.... see above
 
 	// Median point on this dimension becomes parent
+	//var dm = new KDNode().i( d, points[left+m-1]);
 	var dm = new KDNode().i( d, points[left+m-1]);
 
 	// Update to the next dimension, or reset back to 1
@@ -85,10 +86,12 @@ function generate( d, maxD, points, left, right, comparators){
 	// recursively compute the left and right sub-trees, which translate
 	// into 'below' and 'above' for n-dimensions
 	dm.setBelow(
-		maxD, generate( d, maxD, points, left, left+m-2, comparators )
+		//maxD, generate( d, maxD, points, left, left+m-2, comparators )
+		generate( d, maxD, points, left, left+m-2, comparators )
 	);
 	dm.setAbove(
-		maxD, generate( d, maxD, points, left+m, right, comparators )
+		//maxD, generate( d, maxD, points, left+m, right, comparators )
+		generate( d, maxD, points, left+m, right, comparators )
 	);
 	return dm;
 
@@ -112,6 +115,12 @@ function generate( d, maxD, points, left, right, comparators){
 				Q.maxDim = undefined;
 
 				Q.entries = [];
+			},
+
+			dump : function(){var Q=this;
+
+				$.C('dumping tree...');
+				Q.root?Q.root.dump():$.C('empty');
 			},
 			
 			removeAll : function(){var Q=this;
