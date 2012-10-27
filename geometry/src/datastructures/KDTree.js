@@ -15,12 +15,24 @@ function generateKDTree( points ){
 	// we need comparators for each dimension!
 	var comparators = [
 		function( p1, p2 ){
-			if( p1.x() >= p2.x() ) return 1; // handle this better
-			if( p1.x() < p2.x() ) return -1;
+			$.C('1: '+p1.a_id);
+			$.C('2: '+p2.a_id);
+			if( p1.x() > p2.x() ) return 1; // handle this better
+			else if( p1.x() < p2.x() ) return -1;
+			else{
+				if( p1.y() > p2.y() ) return 1;
+				else return -1;
+			}
 		},
 		function( p1, p2 ){
+			$.C('1: '+p1.a_id);
+			$.C('2: '+p2.a_id);
 			if( p1.y() > p2.y() ) return 1; //handle this better
-			if( p1.y() < p2.y() ) return -1;
+			else if( p1.y() < p2.y() ) return -1;
+			else{
+				if( p1.x() > p2.x() ) return 1;
+				else return -1;
+			}
 		}
 	];
 
@@ -39,26 +51,40 @@ function select( points, m, left, right, comparator ){
 
 function generate( d, maxD, points, left, right, comparators){
 
+	$.C("CALLEd!");
+
 	// Handle simple cases
 	if( right < left ) return null;
 	if( right == left ) return new KDNode( points[left] );
 
+	// TEST WE HAVE A compatator!
+	$.C('cmpf:');
+	$.C(d);
+	$.C( comparators[d-1] );
+
+	//PRINT THE POINTS WE HAVE!
+	$.each( points, function(k,p){
+		$.C('-- '+p.a_id);
+	});
+
+
 	// Order the array[left,right] so the mth element will be the median
 	// and the elements prior to it will be <=, though they won't neccessarily
 	// be sorted; similarly, the elements afer will all be >=
-	var m = 1+(right-left)/2;
-	select( points, m, left, right, comparators[d-1] ); // This function must be defined.... see above
+	var m = Math.floor(1+(right-left)/2);
+	//splitaboutKth( A, l, r, k, cmpf )
+	splitaboutKth( points, left, right, m, comparators[d-1] ); // This function must be defined.... see above
 
 	// Median point on this dimension becomes parent
 	var dm = new KDNode().i( d, points[left+m-1]);
 
 	// Update to the next dimension, or reset back to 1
 	d += 1;
-	if( d > maxD ){ d = 1; }
+	if( d >= maxD ){ d = 1; }
 
 	// recursively compute the left and right sub-trees, which translate
 	// into 'below' and 'above' for n-dimensions
-	dm.setBellow(
+	dm.setBelow(
 		maxD, generate( d, maxD, points, left, left+m-2, comparators )
 	);
 	dm.setAbove(

@@ -16,6 +16,8 @@
 			initialize : function(a){var Q=this;
 				Q.$super();
 				
+				$.C('MAKE!!!!');
+
 				Q.point = null; // xPoint
 				Q.dimension = 2; // hard coded!
 				Q.max = undefined;	// int
@@ -32,6 +34,8 @@
 				// Complicated code to go here!
 				Q.dimension = dim;
 				Q.point = pnt;
+
+				return Q;
 			},
 
 			getBelow : function(){

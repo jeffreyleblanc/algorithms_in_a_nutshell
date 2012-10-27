@@ -32,15 +32,6 @@
 	// note l and r are ACTUAL indices
 	function partition( A, l, r, pidx, cmpf){
 		
-		$.C('enter partion...');
-		$.C('pidx is:'+pidx);
-		$.C('l is:'+l);
-		$.C('r is:'+r);
-		if( pidx < l || pidx > r){
-			$.C('ERR!');
-			return pidx; // kill the loop
-		}
-
 		// Check we aren't partitioning nothing:
 		if( l == r){
 			///$.C('SEEING SELF!');
@@ -62,9 +53,7 @@
 		// all values <= pivot moved to front of array, and pivot inserted just after
 		curri = l;
 		for(var i=l; i < r; i++){ //Note, we don't include the last index
-			$.C( 'ms'+ millis());
-			$.C('i is: '+i);
-			$.C('comparing: '+A[i].a_id+' '+pivot.a_id);
+			///$.C('comparing: '+A[i]+' '+pivot);
 			if( cmpf(A[i],pivot) <= 0 ){
 				///$.C('do switch:');
 				swap(A, i, curri);

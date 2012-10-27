@@ -14,10 +14,8 @@
 	<script src="src/geocore/xPoint.js"></script>
 	<!-- DataStructures -->
 		<script src="src/datastructures/SelectSort.js"></script>
-		<!--
 		<script src="src/datastructures/KDNode.js"></script>
 		<script src="src/datastructures/KDTree.js"></script>
-		-->
 	<!-- Algorithms -->
 	<script src="src/algorithms/ConvexHull.js"></script>
 	<!-- Data -->
@@ -127,6 +125,10 @@
 			$('#convexhull').click(function(){
 				ConvexHull( plane );
 			});
+			$('#kdtree_make').click(function(){
+				$.C('Attempt to make the kdtree...');
+				var kdtree = generateKDTree( plane.getPointsArray() );
+			});
 
 		});
 		
@@ -155,7 +157,8 @@
 
 	<br>
 	<span id="example">Exampleplane</span> | 
-	<span id="convexhull">ConvexHull</span>
+	<span id="convexhull">ConvexHull</span> | 
+	<span id="kdtree_make">MakeKDTree</span>
 
 <!-- Canvas -->
 	<div id="fps">fps</div>
