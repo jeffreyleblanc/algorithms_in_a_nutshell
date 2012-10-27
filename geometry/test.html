@@ -127,7 +127,10 @@
 			});
 			$('#kdtree_make').click(function(){
 				$.C('Attempt to make the kdtree...');
-				var kdtree = generateKDTree( plane.getPointsArray() );
+				//var kdtree = generateKDTree( plane.getPointsArray() );
+				var kdtree = new KDTree();
+				kdtree.generate( plane.getPointsArray() );
+
 				$.C('MADE THE TREE!!!!');
 
 				// Try 'dumping the tree
