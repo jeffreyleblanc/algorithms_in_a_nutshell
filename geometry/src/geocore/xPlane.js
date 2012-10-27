@@ -120,14 +120,14 @@
 				Q.renderKDNode( Q.kdtree.root, null, false, 0, 1000, 0, 1000 );
 			},
 
-			renderKDNode : function( p, pn, isAbove, xMin, xMax, yMin, yMax ){var Q=this;
+			renderKDNode : function( p, pn, isAbove, _xMin, _xMax, _yMin, _yMax ){var Q=this;
 
 				if( p==undefined || p==null ) return;
 
-				/*var xMin = 0;
-				var xMax = 1000;
-				var yMin = 0;
-				var yMax = 1000;*/
+				var xMin = _xMin;
+				var xMax = _xMax;
+				var yMin = _yMin;
+				var yMax = _yMax;
 				if( pn == null ){
 					if( p.dimension == 1 )
 					{	xMin = xMax = p.point.pos().x; }
@@ -153,8 +153,13 @@
 				}
 
 				// Iterate
-				Q.renderKDNode( p.above, p, true, xMin, xMax, yMin, yMax );
-				Q.renderKDNode( p.below, p, false, xMin, xMax, yMin, yMax )
+				if( p.dimension == 1){
+					Q.renderKDNode( p.above, p, true, xMin, _xMax, _yMin, _yMax );
+					Q.renderKDNode( p.below, p, false, _xMin, xMax, _yMin, _yMax  );
+				}else{
+					Q.renderKDNode( p.above, p, true, _xMin, _xMax, yMin, _yMax );
+					Q.renderKDNode( p.below, p, false, _xMin, _xMax, _yMin, yMax  );
+				}
 
 				//Draw it:
 				Q.rndr.line(vVec(xMin,yMin),vVec(xMax,yMax),(p.dimension==1?'red':'blue'),2);
