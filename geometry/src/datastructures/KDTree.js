@@ -74,7 +74,7 @@ function generate( d, maxD, points, left, right, comparators){
 	// and the elements prior to it will be <=, though they won't neccessarily
 	// be sorted; similarly, the elements afer will all be >=
 	///var m = Math.floor(1+(right-left)/2);
-	var m = left+Math.floor(1+(right-left)/2);
+	var m = left+Math.floor((1+right-left)/2);
 	//splitaboutKth( A, l, r, k, cmpf )
 	splitaboutKth( points, left, right, m, comparators[d-1] ); // This function must be defined.... see above
 
