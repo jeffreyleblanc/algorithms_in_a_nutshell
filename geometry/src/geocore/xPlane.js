@@ -117,17 +117,17 @@
 
 
 				});*/
-				Q.renderKDNode( Q.kdtree.root, null, false );
+				Q.renderKDNode( Q.kdtree.root, null, false, 0, 1000, 0, 1000 );
 			},
 
-			renderKDNode : function( p, pn, isAbove ){var Q=this;
+			renderKDNode : function( p, pn, isAbove, xMin, xMax, yMin, yMax ){var Q=this;
 
 				if( p==undefined || p==null ) return;
 
-				var xMin = 0;
+				/*var xMin = 0;
 				var xMax = 1000;
 				var yMin = 0;
-				var yMax = 1000;
+				var yMax = 1000;*/
 				if( pn == null ){
 					if( p.dimension == 1 )
 					{	xMin = xMax = p.point.pos().x; }
@@ -153,8 +153,8 @@
 				}
 
 				// Iterate
-				Q.renderKDNode( p.above, p, true );
-				Q.renderKDNode( p.below, p, false );
+				Q.renderKDNode( p.above, p, true, xMin, xMax, yMin, yMax );
+				Q.renderKDNode( p.below, p, false, xMin, xMax, yMin, yMax )
 
 				//Draw it:
 				Q.rndr.line(vVec(xMin,yMin),vVec(xMax,yMax),(p.dimension==1?'red':'blue'),2);
