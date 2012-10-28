@@ -185,8 +185,11 @@
 
 			},
 
-			search : function( hypercube ){ var Q=this;
-				// return xPoint[]
+			search : function( testregion ){ var Q=this;
+				var results = [];
+				if( Q.root == null ) return results;
+				Q.root.search( testregion, results);
+				return results;
 			}
 /*
 public ArrayList<IMultiPoint> search (IHypercube space) {

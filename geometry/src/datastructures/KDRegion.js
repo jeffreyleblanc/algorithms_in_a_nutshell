@@ -47,7 +47,7 @@
 				return (x >= Q.left) && (x <= Q.right) && (y >= Q.bottom) && (y <= Q.top);
 			},
 
-			ontains : function( region ){var Q=this;
+			contains : function( r ){var Q=this;
 				var rl = r.left;
 				var rr = r.right;
 				if(Q.left <= rl && rl <= rr && rr <= Q.right) {

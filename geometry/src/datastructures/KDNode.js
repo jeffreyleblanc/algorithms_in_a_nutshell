@@ -77,8 +77,51 @@
 					return pnt.pos().y < Q.point.pos().y;
 			},
 
-			search : function( hypercube, pntlist ){var Q=this;
-				// do stuff
+			search : function( space, results ){var Q=this;
+				// Wholly contained? Take all descendant points
+				if( space.contains( Q.region ) ){
+					Q.drain( results );
+					return;
+				}
+
+				// OK. Is our point, at least contained?
+				if( space.intersects( Q.point )) {
+					results.push( Q.point );
+				}
+
+				// recursively progress along both ancestral trees, if demanded. Note that
+				// the cost in manipulating space to be "cropped" to the proper structure
+				// is excessive and leaving it alone has no bearing on the computation.
+				/*if (space.getLeft(dimension) < coord) {
+					if (below != null) { below.search(space, results); }
+				}
+				if (coord < space.getRight(dimension)) {
+					if (above != null) { above.search(space, results); }
+				}*/
+
+				// recursively progress along both ancestral trees, if demanded. Note that
+				// the cost in manipulating space to be "cropped" to the proper structure
+				// is excessive and leaving it alone has no bearing on the computation.
+				if( Q.dimension == 1){
+					var coord = Q.point.pos().x;
+					if( space.left < coord) {
+						if( Q.below != null) { Q.below.search( space, results); }
+					}
+					if( coord < space.right ) {
+						if( Q.above != null) { Q.above.search(space, results); }
+					}
+
+				}else{
+					var coord = Q.point.pos().y;
+					if( space.bottom < coord) {
+						if( Q.below != null) { Q.below.search( space, results); }
+					}
+					if( coord < space.top ) {
+						if( Q.above != null) { Q.above.search(space, results); }
+					}
+
+				}
+
 			},
 /*
 public void search (IHypercube space, ArrayList<IMultiPoint> results) {
@@ -113,6 +156,13 @@ private void drain(ArrayList<IMultiPoint> results) {
 	if (above != null) { above.drain (results); }
 }
 */
+			// Helper method to visit all descendant nodes in the tree rooted at given node.
+			drain : function( results ){var Q=this;
+				if( Q.below != null) { Q.below.drain(results); }
+				results.push(Q.point);
+				if( Q.above != null) { Q.above.drain(results); }
+			},
+
 
 			isBoundless : function(){var Q=this;
 				// return boolean

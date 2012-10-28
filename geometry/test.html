@@ -139,6 +139,10 @@
 				plane.kdtree = kdtree;
 			});
 
+			$('#defineregion').click(function(){
+				plane.defineregion = ! plane.defineregion;
+			});
+
 		});
 		
 </script>
@@ -167,7 +171,8 @@
 	<br>
 	<span id="example">Exampleplane</span> | 
 	<span id="convexhull">ConvexHull</span> | 
-	<span id="kdtree_make">MakeKDTree</span>
+	<span id="kdtree_make">MakeKDTree</span> |
+	<span id="defineregion">defineregion</span>
 
 <!-- Canvas -->
 	<div id="fps">fps</div>

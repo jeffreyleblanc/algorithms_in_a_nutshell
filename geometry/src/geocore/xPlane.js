@@ -26,6 +26,10 @@
 
 					Q.hull = null;
 					Q.kdtree = null;
+
+					// Enables drag and creation of a region
+					Q.defineregion = false; //state
+					Q.region = null;
 			},
 			
 			postInitialize : function(){var Q=this;
@@ -87,8 +91,17 @@
 				
 				Q.renderHull();
 				Q.renderKDTree();
+				Q.renderRegion();
 			},
 			
+			renderRegion : function(){var Q=this;
+				if( Q.region == null ) return;
+
+				var r = Q.region;
+				Q.rndr.rect( vVec(r.left,r.bottom),r.right-r.left,r.top-r.bottom,'rgba(255,255,0,0.3)');
+
+			},
+
 			renderKDTree : function(){var Q=this;
 				if( Q.kdtree == null) return;
 				Q.renderKDNode( Q.kdtree.root, null, false, 0, 1000, 0, 1000 );
@@ -184,19 +197,52 @@
 				},
 				// Something of a hack here..
 				click : function( evt ){var Q=this;
+					Q.defineregion = false; //state
+					Q.region = null;
+
 					if( Q.kdtree != null ){
 						// Make a temp xPoint:
 						var tmpC = Q.getNewPoint();
 						tmpC.pos(evt.lpos);
 						// test it
 						Q.kdtree.nearest( tmpC );
+					}
+				},
 
-						/*var parent = Q.kdtree.parent( tmpC );
-						// print what we found:
-						$.C('parent is:')
-						$.C('a_id: '+parent.point.a_id);*/
+				mousedown : function( evt ){var Q=this;
+					if( Q.defineregion ){
+						Q.region =  new KDRegion();
+						Q.region.setInfin();
+						Q.region.left = evt.lpos.x;
+						Q.region.bottom = evt.lpos.y;
+						Q.region.right = evt.lpos.x+1;
+						Q.region.top = evt.lpos.y+1;
+					}
+				},
+
+				mouseup : function( evt ){var Q=this;
+					if( Q.defineregion && Q.region != null ){
+						// do stuff with region
+						if( Q.kdtree != null ){
+							var results = Q.kdtree.search( Q.region );
+							$.C('Range Query Found:');
+							$.each(results, function(k,p){
+								$.C(p.a_id);
+							});
+						}
+						// delete the region
+						Q.region.del();
+						Q.region = null;
+					}
+				},
+
+				mousemove : function( evt ){var Q=this;
+					if( evt.mDown && Q.defineregion && Q.region!=null){
+						Q.region.right = evt.lpos.x;
+						Q.region.top = evt.lpos.y;
 					}
 				}
+
 			}},
 			
 			
