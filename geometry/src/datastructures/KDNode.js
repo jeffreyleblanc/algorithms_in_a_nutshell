@@ -80,6 +80,39 @@
 			search : function( hypercube, pntlist ){var Q=this;
 				// do stuff
 			},
+/*
+public void search (IHypercube space, ArrayList<IMultiPoint> results) {
+	// Wholly contained? Take all descendant points		
+	if (space.contains (region)) {
+		this.drain(results);
+		return;
+	}
+
+	// OK. Is our point, at least contained?
+	if (space.intersects (cached)) {
+		results.add(point);
+	}
+
+	// recursively progress along both ancestral trees, if demanded. Note that
+	// the cost in manipulating space to be "cropped" to the proper structure
+	// is excessive and leaving it alone has no bearing on the computation.
+	if (space.getLeft(dimension) < coord) {
+		if (below != null) { below.search(space, results); }
+	}
+	if (coord < space.getRight(dimension)) {
+		if (above != null) { above.search(space, results); }
+	}
+}
+*/
+
+/*
+// Helper method to visit all descendant nodes in the tree rooted at given node.
+private void drain(ArrayList<IMultiPoint> results) {
+	if (below != null) { below.drain (results); }
+	results.add(this.point);
+	if (above != null) { above.drain (results); }
+}
+*/
 
 			isBoundless : function(){var Q=this;
 				// return boolean

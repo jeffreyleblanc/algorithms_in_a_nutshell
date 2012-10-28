@@ -44,6 +44,12 @@
 				maxDim = 2 + 1; // hardcoded...
 
 				Q.setRoot( Q.generateNode(1, maxDim, points, 0, points.length-1, Q.$class.comparators ) );
+				
+				// For the moment we will add something similar to the drawing code
+				// in xPlane to determine the regions for each node
+				// at some point that could probably be done within the
+				// generateNode sequence
+
 				return Q;
 			},
 
@@ -191,6 +197,20 @@
 			search : function( hypercube ){ var Q=this;
 				// return xPoint[]
 			}
+/*
+public ArrayList<IMultiPoint> search (IHypercube space) {
+	ArrayList<IMultiPoint> results = new ArrayList<IMultiPoint> (); 
+	
+	if (root == null) {
+		return results;
+	}
+	
+	// search, placing results into 'results'.
+	root.search(space, results);
+	
+	return results;
+}
+*/
 
 			
 	});
