@@ -49,6 +49,7 @@
 				// in xPlane to determine the regions for each node
 				// at some point that could probably be done within the
 				// generateNode sequence
+				Q.setBounds( Q.root, null, false, 0, 1000, 00, 1000 );
 
 				return Q;
 			},
@@ -83,6 +84,42 @@
 				return dm;
 
 			},
+				
+			//Q.setBounds( Q.kdtree.root, null, false, 0, 1000, 0, 1000 );
+
+			setBounds : function( p, pn, isAbove, _xMin, _xMax, _yMin, _yMax ){var Q=this;
+
+				if( p==undefined || p==null ) return;
+
+
+				var xMin = _xMin;
+				var xMax = _xMax;
+				var yMin = _yMin;
+				var yMax = _yMax;
+				p.region.i( xMin, xMax, yMin, yMax );
+
+				var coor = 0;
+				if( p.dimension == 1 )
+					coor = p.point.pos().x;
+				else
+					coor = p.point.pos().y;
+				
+				// Iterate
+				if( p.dimension == 1){ // splitting along x
+					Q.setBounds( p.above, p, true, coor, _xMax, _yMin, _yMax );
+					Q.setBounds( p.below, p, false, _xMin, coor, _yMin, _yMax  );
+				}else{
+					Q.setBounds( p.above, p, true, _xMin, _xMax, coor, _yMax );
+					Q.setBounds( p.below, p, false, _xMin, _xMax, _yMin, coor  );
+				}
+
+				//Draw it:
+				//Q.rndr.line(vVec(xMin,yMin),vVec(xMax,yMax),(p.dimension==1?'red':'blue'),2);
+
+			},
+
+
+		//-- Accessors -------------------------------------------//
 
 			dump : function(){var Q=this;
 

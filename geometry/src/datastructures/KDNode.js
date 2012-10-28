@@ -20,7 +20,7 @@
 				Q.dimension = 2; // hard coded!
 				Q.max = undefined;	// int
 				Q.coordinate = undefined; //double
-				Q.region = null; //HyperCube
+				Q.region = new KDRegion(); //HyperCube
 
 				Q.below = null; //KDNode
 				Q.above = null; //KDNode

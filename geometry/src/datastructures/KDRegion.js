@@ -27,6 +27,7 @@
 				Q.right = 2000;
 				Q.bottom = -1000; // Remember y reversal
 				Q.top = 2000;
+				return Q;
 			},
 			
 			i : function( l, r, b, t ){var Q=this;
@@ -66,8 +67,8 @@
 					Q.top == other.top;
 			},
 
-			print function(){var Q=this;
-				return "[" + Q.left + "," + Q.bottom + " : " + Q.right + "," + Q.top + "]";
+			print : function(){var Q=this;
+				$.C( "[" + Q.left + "," + Q.bottom + " : " + Q.right + "," + Q.top + "]" );
 			}
 			
 	});

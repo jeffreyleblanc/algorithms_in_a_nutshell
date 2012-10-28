@@ -27,6 +27,8 @@
 					Q.renderStroke = false;
 
 					Q.a_id = 0;
+
+					Q.kdnode = null;
 			},
 			
 			del : function(){ var Q=this;
@@ -79,6 +81,32 @@
 					Q.rndr.circle(vVec(), Q.P.radius+4,null,Q.P.readytolinkcolor.RGBA(),2);
 
 				Q.a_render();
+
+				if(Q.mouseInside)
+					Q.renderKDRegion();
+			},
+
+			renderKDRegion : function(){var Q=this;
+				if( Q.kdnode == null ) return;
+
+				$.C('TRY RENDER');
+				Q.kdnode.region.print();
+
+				
+				//Q.rndr.rect(vVec(),w,h,'rgba(255,0,0,0.3)');
+				
+
+
+				Q.ctx.save();
+				Q.ctx.translate( -1.0*Q.P.pos.x, -1.0*Q.P.pos.y);
+				
+				var r = Q.kdnode.region;
+				var w = r.right-r.left;
+				var h = r.top-r.bottom;
+				//Q.rndr.rect( vVec(r.right,r.bottom) ,w,h,'rgba(255,0,0,0.3)');
+				Q.rndr.rect( vVec(r.left,r.bottom) ,w,h,'rgba(255,0,0,0.3)');
+
+				Q.ctx.restore();
 			},
 			
 			renderCircle : function(){var Q=this;
