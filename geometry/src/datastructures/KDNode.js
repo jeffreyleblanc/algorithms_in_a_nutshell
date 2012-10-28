@@ -70,9 +70,11 @@
 				return this.region;
 			},
 
-			isBellow : function( pnt ){var Q=this;
-				// do stuff
-				// return boolean
+			isBelow : function( pnt ){var Q=this;
+				if( Q.dimension == 1)
+					return pnt.pos().x < Q.point.pos().x;
+				else
+					return pnt.pos().y < Q.point.pos().y;
 			},
 
 			search : function( hypercube, pntlist ){var Q=this;
@@ -89,7 +91,48 @@
 
 			shorter : function( numlist, num){ 
 				// does something....
-			}
+			},
+
+			nearest : function( pnt, min ){var Q=this;
+
+				//$.C('TRY! :'+Q.point.a_id);
+
+				var result = null; // NOTE THIS IS AN XPOINT
+
+				var d = Q.point.distance( pnt );
+				if( d < min ){
+					result = Q.point;
+					min = d;
+				}
+
+				var dp = 0;
+				if( Q.dimension == 1 )
+					dp = Math.abs( pnt.pos().x - Q.point.pos().x );
+				else
+					dp = Math.abs( pnt.pos().y - Q.point.pos().y );
+				if( dp < min ){
+					//$.C('dp < min');
+					if( Q.above != null ){
+						var pt = Q.above.nearest( pnt, min );
+						if(pt!=null){result = pt;}
+					}
+					if( Q.below != null ){
+						var pt = Q.below.nearest( pnt, min );
+						if(pt!=null){result = pt;}
+					}	
+				}else{
+					//$.C('try other');
+					if( Q.isBelow( pnt) && Q.below != null ){
+						pt = Q.below.nearest(pnt, min);
+					}else if(Q.above != null){
+						pt = Q.above.nearest(pnt, min);
+					}
+					if(pt!=null){result = pt;}
+				}
+
+				return result;
+
+			},
 
 			
 	});

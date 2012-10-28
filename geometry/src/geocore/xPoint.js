@@ -35,6 +35,12 @@
 
 		//-- API -------------------------------------------//
 
+			//! Note we could also base alot of this off
+			// of the square of the distance...
+			distance : function( xpnt ){
+				return this.pos().subN( xpnt.pos() ).l();
+			},
+
 			getX : function(){
 				return this.P.pos.x;
 			},

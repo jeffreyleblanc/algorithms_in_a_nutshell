@@ -181,6 +181,21 @@
 					tmpC.pos(evt.lpos);
 					Q.addPoint( tmpC );
 					//return true;
+				},
+				// Something of a hack here..
+				click : function( evt ){var Q=this;
+					if( Q.kdtree != null ){
+						// Make a temp xPoint:
+						var tmpC = Q.getNewPoint();
+						tmpC.pos(evt.lpos);
+						// test it
+						Q.kdtree.nearest( tmpC );
+
+						/*var parent = Q.kdtree.parent( tmpC );
+						// print what we found:
+						$.C('parent is:')
+						$.C('a_id: '+parent.point.a_id);*/
+					}
 				}
 			}},
 			

@@ -97,9 +97,32 @@
 				// Complicated code to go here!
 			},
 
+			// Pass in a xPoint instance, and you get back the node
+			// that control that region
 			parent : function( pnt ){ var Q=this;
-				// Complicated code to go here!
-				// return KDNode*
+				
+				node = Q.root;
+				next = null;
+				while( node != null ){
+
+					if( node.isBelow(pnt) ){
+						next = node.getBelow();
+						if (next == null) {
+							return node;
+						} else {
+							node = next;
+						}
+					} else {
+						next = node.getAbove();
+						if (next == null) {
+							return node;
+						} else {
+							node = next;
+						}
+					}
+				}
+				// An issue if we get here
+				$.C('Issue');
 			},
 
 			getRoot : function( ){ var Q=this;
@@ -111,9 +134,59 @@
 			},
 
 			nearest : function( pnt ){ var Q=this;
-				// Complicated code to go here!
-				// return KDNode*
+				if (root == null || pnt == null) return null;
+				// find parent node to which pnt would have been inserted. This is our
+			    // best shot at locating closest point; compute best distance guess so far
+				var parent = Q.parent(pnt);
+				var result = parent.point;
+				var smallest = pnt.distance(result);
+
+				$.C('parent is:')
+				$.C('a_id: '+parent.point.a_id);
+				$.C('dist is: '+smallest );
+				
+				/*
+				// now start back at the root, and check all rectangles that potentially
+				// overlap this smallest distance. If better one is found, return it.
+				numRecursion=0;        // STATS
+				numDoubleRecursion=0;  // STATS
+				double best[] = new double[] { smallest };  // computed best distance.
+				
+				double raw[] = pnt.raw();
+				IMultiPoint betterOne = root.nearest (raw, best);
+				if (betterOne != null) { return betterOne; }
+				return result;
+				*/
+				var betterOne = Q.root.nearest( pnt, smallest );
+				if( betterOne != null || betterOne != undefined){
+					$.C('found better:')
+					$.C('id: '+betterOne.a_id);
+				}
+
 			},
+
+/*
+	public IMultiPoint nearest (IMultiPoint target) {
+		if (root == null || target == null) return null;
+	
+		// find parent node to which target would have been inserted. This is our
+	    // best shot at locating closest point; compute best distance guess so far
+		DimensionalNode parent = parent(target);
+		IMultiPoint result = parent.point;
+		double smallest = target.distance(result);
+		
+		// now start back at the root, and check all rectangles that potentially
+		// overlap this smallest distance. If better one is found, return it.
+		numRecursion=0;        // STATS
+		numDoubleRecursion=0;  // STATS
+		double best[] = new double[] { smallest };  // computed best distance.
+		
+		double raw[] = target.raw();
+		IMultiPoint betterOne = root.nearest (raw, best);
+		if (betterOne != null) { return betterOne; }
+		return result;
+	}
+*/
 
 			search : function( hypercube ){ var Q=this;
 				// return xPoint[]
