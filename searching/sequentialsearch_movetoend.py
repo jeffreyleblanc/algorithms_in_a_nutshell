@@ -1,3 +1,8 @@
+'''
+pretty darn simple
+'''
+
+#-- Methods -------------------------------------#
 
 # Note there are many other ways to implement this functionality
 def move_idx_end( A, idx ):
@@ -18,6 +23,7 @@ def sequential_search_moveend( A, tgt ):
 			return True
 	return False
 
+#-- Run -------------------------------------#
 
 L = [ 'a', 'h', 'd', 'z', 'f' ]
 

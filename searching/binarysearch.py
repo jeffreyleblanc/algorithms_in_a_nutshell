@@ -1,4 +1,8 @@
+'''
+Very fast, but requires the array is sorted
+'''
 
+#-- Methods -------------------------------------#
 
 def binary_search( A, t ):
 	low = 0
@@ -13,6 +17,7 @@ def binary_search( A, t ):
 			low = ix+1
 	return False
 
+#-- Run -------------------------------------#
 
 L = range(0,40, 2)
 

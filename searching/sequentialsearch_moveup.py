@@ -1,3 +1,8 @@
+'''
+pretty darn simple
+'''
+
+#-- Methods -------------------------------------#
 
 def swap( A, i1, i2):
 	tmp = A[i1]
@@ -12,6 +17,7 @@ def sequential_search_moveup( A, tgt ):
 			return True
 	return False
 
+#-- Run -------------------------------------#
 
 L = [ 'a', 'h', 'd', 'z', 'f' ]
 

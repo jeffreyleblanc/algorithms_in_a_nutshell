@@ -1,6 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+'''
+
+https://github.com/MartinThoma/algorithms/blob/master/datastructures/redBlackTree.py
+
+'''
+
+
 class rbnode(object):
 
     def __init__(self, key):
