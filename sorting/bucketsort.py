@@ -1,57 +1,50 @@
-#-- Insertion Sort ----------------------#
+'''>
+hash sort
+uses a hash function to cut up the problem into subunits
+the subunits can be solved with any sorting algorithm
+'''
 
-def cmp( a, b ):
-	return a > b # Note that in python bool are ints ( 0, 1 )
+from common import cmp, swap, log, testalgo
+from insertionsort import insertionsort
 
-def insert( arr, idx ):
-	i = idx - 1
-	val = arr[idx]
-	while i >=0 and cmp( arr[i], val ) > 0 :
-		arr[i+1] = arr[i]
-		i -= 1	
-	arr[i+1] = val
+#-- Methods -------------------------------------#
 
-def insertionSort( arr ):
-	for j in range(1, len(arr)):
-		insert( arr, j )
-
-#-- Bucket Sort ----------------------#
-
-hashN = 4
-
-def hash( val ):
-	return int(val / hashN )
+# Purely for demonstation purposes
+def hash( val , hashBase):
+	hash = int(val / hashBase )
+	if hash >= hashBase:
+		hash = hashBase-1
+	return hash
 
 def extract( B, A ):
 
 	idx = 0
 	for i in range(0, len(B) ):
-		insertionSort( B[i] )
+		insertionsort( B[i], 0, len(B[i]) )
 
 		for m in range(0,len(B[i])):
 
 			A[idx] = B[i][m]
 			idx += 1
 
-def bucketsort( A , nb ):
+def bucketsort( A ):
 
-	B = [ [] for _ in xrange(nb) ]
+	# Purely for demonstation purposes
+	hashN = 5 
+
+	B = [ [] for _ in xrange(hashN) ]
 
 	for i in range(0,len(A)):
-		k = hash(A[i])
+		k = hash(A[i], hashN )
 		B[k].append( A[i] )
 
 	extract( B, A )
 
 #-- Run ----------------------#
 
-L = [7,5,13,2,14,1,6]
+if __name__ == "__main__":
 
-print L
-
-bucketsort( L , hashN )
-
-print L
+	testalgo( bucketsort )
 
 
 

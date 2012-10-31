@@ -1,16 +1,12 @@
+'''>
+quick sort
+sort of a simpler version of median sort
+also see introsort
+'''
+
+from common import cmp, swap, log, testalgo
 
 #-- Methods -------------------------------------#
-
-def log( string ):
-	print string
-
-def cmp( a, b ):
-	return a > b # Note that in python bool are ints ( 0, 1 )
-
-def swap( A, i1, i2):
-	tmp = A[i1]
-	A[i1] = A[i2]
-	A[i2] = tmp
 
 def selectPivotIndex(A,l,r):
 	return int( (l+r)/2 )
@@ -25,7 +21,6 @@ def partition(A,l,r):
 			store += 1
 	swap(A,store,r)
 	return store
-
  
 def quicksort( A, l, r ):
 	if l < r:
@@ -35,10 +30,6 @@ def quicksort( A, l, r ):
 
 #-- Run -------------------------------------#
 
-L = [ 15, 9, 8, 1, 4, 11, 7, 12, 13, 6, 5, 3, 16, 2, 10, 14, -4 ]
+if __name__ == "__main__":
 
-print L
-
-quicksort( L, 0, len(L)-1 )
-
-print L
+	testalgo( quicksort )

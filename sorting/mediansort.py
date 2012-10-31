@@ -1,28 +1,22 @@
+'''>
+median sort
+finds the median (or a pivot index) in the array and subdivides about that
+applies the same method to the two resulting subarrays and so on till sorted
+an issue is that if the pivot selection is far from the median, less efficient
+'''
+
+from common import cmp, swap, log, testalgo
 
 #-- Methods -------------------------------------#
 
-def log( string ):
-	print string
-
-def cmp( a, b ):
-	return a > b # Note that in python bool are ints ( 0, 1 )
-
-def swap( A, i1, i2):
-	tmp = A[i1]
-	A[i1] = A[i2]
-	A[i2] = tmp
-
-
 def partition( A, l, r, pidx):
-	idx = 0
-	store = 0
-	pivot = A[pidx]
+
+	idx, store, pivot = 0, l, A[pidx]
 
 	# move pivot to end of the array
 	swap(A,r,pidx)
 
 	# all values <= pivot moved to front of array, and pivot inserted just after
-	store = l
 	for i in range(l,r):
 		if cmp(A[i],pivot) <= 0:
 			swap(A, i, store)
@@ -44,7 +38,8 @@ def selectKth(A, k, l, r):
 		return selectKth(A, k, l, pivotIdx-1)
 	else:
  		return selectKth(A, k-(pivotIdx-l+1), pivotIdx+1, r)
- 
+
+#! Note there is also a non-recursive way to implment this
 def mediansort( A, l, r ):
 	if r <= l:
 		return
@@ -57,10 +52,6 @@ def mediansort( A, l, r ):
 
 #-- Run -------------------------------------#
 
-L = [ 15, 9, 8, 1, 4, 11, 7, 12, 13, 6, 5, 3, 16, 2, 10, 14 ]
+if __name__ == "__main__":
 
-print L
-
-mediansort( L, 0, len(L)-1 )
-
-print L
+	testalgo( mediansort )
