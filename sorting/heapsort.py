@@ -1,16 +1,11 @@
+'''>
+heap sort
+uses a sort of binary tree
+'''
+
+from common import cmp, swap, log, testalgo
 
 #-- Methods -------------------------------------#
-
-def log( string ):
-	print string
-
-def cmp( a, b ):
-	return a > b # Note that in python bool are ints ( 0, 1 )
-
-def swap( A, i1, i2):
-	tmp = A[i1]
-	A[i1] = A[i2]
-	A[i2] = tmp
 
 def heapify(A,idx,max):
 	l = 2*idx+1
@@ -26,22 +21,18 @@ def heapify(A,idx,max):
 		heapify( A, largest, max)
 
 def buildHeap(A):
-	for i in range(int(len(A)/2)-1,-1,-1):
+	for i in range(int(len(A)/2)-1,-1,-1): # range is [ |n/2|-1 ... 0 ]
 		heapify(A,i,len(A))
 
-def heapsort(A):
+def heapsort(A, l, r): # note l and r not used here
 	buildHeap(A)
-	for i in range(len(A)-1,0,-1):
+	for i in range(len(A)-1,0,-1): # range is [ n-1 ... 0 ]
 		swap(A,0,i)
 		heapify(A,0,i)
 
 #-- Run -------------------------------------#
 
-L = [ 15, 9, 8, -1, 4, 11, 7, 12, 13, -6, 5, 3, 16, 2, 10, 14, -3 ]
+if __name__ == "__main__":
 
-print L
-
-heapsort( L )
-
-print L
+	testalgo( heapsort )
 

@@ -1,10 +1,18 @@
-'''
-here A contains only integers from [0,k) -- in other words k is not included
+'''>
+counting sort
+good when all elements are known to be within a range
+but the number of elements is much greater than the range size
+(in other words, many duplicates )
+here A contains only integers from [0,k) 
+-- in other words k is not included in the possible set
 '''
 
+from common import cmp, swap, log, testalgo
+
+#-- Methods -------------------------------------#
+
 def countingsort( A, n, k):
-	i = 0
-	idx = 0
+	i = idx = 0
 
 	B = [0] * k
 
@@ -16,15 +24,17 @@ def countingsort( A, n, k):
 			A[idx] = i
 			idx += 1
 			B[i] -= 1
-
 	del B
 
+#-- Run -------------------------------------#
 
-L = [3,0,2,0,0,2,3]
+if __name__ == "__main__":
 
-print L
+	L = [3,0,2,0,0,2,3]
 
-countingsort(L, len(L), 4)
+	print L
 
-print L
+	countingsort(L, len(L), 4)
+
+	print L
 
