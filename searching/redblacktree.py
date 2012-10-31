@@ -1,12 +1,13 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-
 '''
-
+Red Black Tree Implementation
+via:
 https://github.com/MartinThoma/algorithms/blob/master/datastructures/redBlackTree.py
+with some modifications...
 
+A red blacktree self balances as elements are added/subtracted, keeping it efficient
 '''
 
+#-- Structures and Methods -------------------------------------#
 
 class rbnode(object):
 
@@ -25,11 +26,10 @@ class rbnode(object):
         else:
             return str("%s" % self.key)
 
+    # debug printing type 1
     def dump(self, tabs):
-
         if self.isNil:
             return
-
         if tabs < 0:
             tabs = 0
         print ( "\t" * tabs )+str(self.key)
@@ -43,25 +43,19 @@ class rbnode(object):
         elif self.right != None:
             print ( "\t" * tabs )+'\\'
             self.right.dump(tabs+1)
-
+    # debug printing type 2
     def dump2(self, level, tabs, N):
-
         if self.isNil:
             return
-
         if tabs < 0:
             tabs = 0
-        print ( "\t" * tabs )+str(self.key)
         N[level][tabs] = self.key
         if self.left != None and self.right != None:
-            print ( "\t" * tabs )+'/\\'
             self.left.dump2(level+1,tabs-1,N)
             self.right.dump2(level+1,tabs+1,N)
         elif self.left != None:
-            print ( "\t" * tabs )+'/'
             self.left.dump2(level+1,tabs-1,N)
         elif self.right != None:
-            print ( "\t" * tabs )+'\\'
             self.right.dump2(level+1,tabs+1,N)
 
 class rbtree(object):
@@ -486,37 +480,31 @@ class rbtree(object):
         is_red_black_node(self.root)
         return not self.root.red
 
+#--------------------------------------------#
+#-- Run -------------------------------------#
 
-#---------
-
-print 'hello'
+print '-------------------------------------'
+print 'Start of Test'
 
 S = [ 13, 26, 43, 17, 25, 15, 16 ]
-
 T = rbtree()
 for v in S:
-    print v
     T.insert_key( v )
-
 assert T.check_invariants()
 
+print '\nTry some searches'
 print T.search( 26 )
 print T.search( 10 )
 
-T.root.dump(6)
-
-X = [['' for _ in range(14)] for _ in range(14)]
-
-T.root.dump2( 0, 7, X)
-
+print '\nTree we have now:'
+X = [['' for _ in range(7)] for _ in range(7)]
+T.root.dump2( 0, 3, X)
 for r in X:
     print r
 
-print '... insert 14 ....'
-
+print '\nInsert 14:'
 T.insert_key( 14 )
-X = [['' for _ in range(14)] for _ in range(14)]
-T.root.dump2( 0, 7, X)
-
+X = [['' for _ in range(7)] for _ in range(7)]
+T.root.dump2( 0, 3, X)
 for r in X:
     print r
