@@ -9,13 +9,16 @@ Sorting Algorithms:
 
 General Critera for choosing ( see p99 )
 
-Criteria			Algorithim
-Only a few items	insertion	
-mostly sorted		insertion
-avoid worst case	heap
-best average		quick
-dense universe		bucket
-little code 		insertion
+Only a few items > *insertion*	
+mostly sorted > insertion
+avoid worst case
+: heap
+best average
+: quick
+dense universe
+: bucket
+little code
+: insertion
 
 
 --------------------------------------------
