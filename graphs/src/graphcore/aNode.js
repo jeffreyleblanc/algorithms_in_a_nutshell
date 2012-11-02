@@ -21,16 +21,15 @@
 				//-- Pointer to Controller
 					Q.U.graph = null; //-- Pointer to graph
 
-				//-- ANALYSIS TOOLS
-
-					Q.pred = null;//-1;
-					Q.discovered = -1;
-					Q.finished = -1;
-					Q.color = '-'; //'W', 'G', 'K'
-
-					Q.dist = 0;
-
-					Q.a_id = Q.$class.$count;
+				//== ANALYSIS TOOLS
+					Q.A = {}; 	//-- Analysis tools container
+					Q.A.id = Q.$class.$count;	// id of the node
+					Q.A.pred = null;			// previous node
+					Q.A.discovered = -1;		// whether a node has been discovered
+					Q.A.finished = -1;			// done finding
+					Q.A.color = '-'; 			//'W', 'G', 'K' : color, used to mark in searching
+					Q.A.dist = 0;				// distance calculations
+					
 			},
 			
 			//?-- Delete Children Option?
@@ -42,6 +41,9 @@
 				//-- Call Super
 				Q.$super();
 			},
+
+		//== Analysis =====================================================//
+
 			
 		//-- Graph Membership -------------------------------------------//
 		

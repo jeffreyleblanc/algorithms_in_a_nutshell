@@ -6,34 +6,34 @@ function depthFirstSearch( graph, s ){
 
 	var V = graph.U.nodes.cO.L;
 	$.each( V, function(i,v){
-		v.pred = null;
-		v.discovered = -1;
-		v.finished = -1;
-		v.color = 'W';
+		v.A.pred = null;
+		v.A.discovered = -1;
+		v.A.finished = -1;
+		v.A.color = 'W';
 	});
 
 	window.counter = 0; // defines as global
 	dfs_visit( s );
 
 	$.each( V, function(i,v){
-		if( v.color == 'W')
+		if( v.A.color == 'W')
 			dfs_visit( v );
 	});
 };
 
 function dfs_visit( u ){
 
-	u.color = 'G';
-	u.discovered = ++window.counter;
+	u.A.color = 'G';
+	u.A.discovered = ++window.counter;
 
 	N = u.getLinkedNodes();
 	$.each( N, function(i,v){
-		if( v.color == 'W'){
-			v.pred = u;
+		if( v.A.color == 'W'){
+			v.A.pred = u;
 			dfs_visit( v );
 		}
 	});
 
-	u.color = 'K';
-	u.finished = ++window.counter;
+	u.A.color = 'K';
+	u.A.finished = ++window.counter;
 }

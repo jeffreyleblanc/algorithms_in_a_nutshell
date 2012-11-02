@@ -7,14 +7,14 @@ function dijsktraPQ( graph, s, e ){
 
 	var V = graph.U.nodes.cO.L;
 	$.each( V, function(i,v){
-		v.pred = null;
-		v.dist = 1000000;
+		v.A.pred = null;
+		v.A.dist = 1000000;
 	});
-	s.dist = 0;
+	s.A.dist = 0;
 
 	var PQ = new PriorityQueue();
 	$.each( V, function(i,v){
-		PQ.push( v, v.dist );
+		PQ.push( v, v.A.dist );
 	});
 	
 	while( ! PQ.empty() ){
@@ -25,12 +25,12 @@ function dijsktraPQ( graph, s, e ){
 			var e = v.getLinkingEdgeByPtr(u);
 			$.C( v.id() );
 			$.C( u.id() );
-			var newLen = u.dist + e.currDist;
+			var newLen = u.A.dist + e.currDist;
 			$.C( newLen );
-			if( newLen < v.dist ){
+			if( newLen < v.A.dist ){
 				PQ.updatePriority( v, newLen );
-				v.dist = newLen;
-				v.pred = u;
+				v.A.dist = newLen;
+				v.A.pred = u;
 			}
 
 		});

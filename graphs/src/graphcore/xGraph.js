@@ -27,9 +27,10 @@
 				//-- Messages
 					Q.msgREADY = false;
 					Q.MSG = null;
-					
+				//-- Suppress drag
 					Q.draggable =false;////////////
 
+				/// move to aGraph
 					Q.s = null; // sink node;
 					Q.t = null; // target node;
 			},
@@ -43,6 +44,8 @@
 					Q.addC( Q.U.nodes );
 				}
 			},
+
+		//== Analysis =====================================================//
 			
 		//-- Links --------------------------------//
 			setCnvs : function( cnvs ){

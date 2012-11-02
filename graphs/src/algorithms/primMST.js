@@ -8,14 +8,14 @@ function primMST( graph ){
 
 	var V = graph.U.nodes.cO.L;
 	$.each( V, function(i,v){
-		v.pred = null;
-		v.dist = 1000000; // "key"
+		v.A.pred = null;
+		v.A.dist = 1000000; // "key"
 	});
-	V[0].dist = 0;
+	V[0].A.dist = 0;
 
 	var PQ = new PriorityQueue();
 	$.each( V, function(i,v){
-		PQ.push( v, v.dist );
+		PQ.push( v, v.A.dist );
 	});
 	
 	while( ! PQ.empty() ){
@@ -26,9 +26,9 @@ function primMST( graph ){
 			if( PQ.includes( v )){
 				var e = u.getLinkingEdgeByPtr( v );
 				var w = e.currDist;
-				if( w < v.dist ){
-					v.pred = u;
-					v.dist = w;
+				if( w < v.A.dist ){
+					v.A.pred = u;
+					v.A.dist = w;
 					PQ.updatePriority( v, w );
 				}
 			}
@@ -38,8 +38,8 @@ function primMST( graph ){
 
 	// Set any edges yellow...
 	$.each( V, function(i,v){
-		if( v.pred != null ){
-			var e = v.getLinkingEdgeByPtr( v.pred );
+		if( v.A.pred != null ){
+			var e = v.getLinkingEdgeByPtr( v.A.pred );
 			e.color.RGBA(255,255,0,0.75);
 		}
 	});

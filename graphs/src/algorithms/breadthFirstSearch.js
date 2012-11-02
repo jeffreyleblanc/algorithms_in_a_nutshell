@@ -6,13 +6,13 @@ function breadthFirstSearch( graph, s ){
 
 	var V = graph.U.nodes.cO.L;
 	$.each( V, function(i,v){
-		v.pred = null;
-		v.dist = 1000000;
-		v.color = 'W';
+		v.A.pred = null;
+		v.A.dist = 1000000;
+		v.A.color = 'W';
 	});
 
-	s.color = 'G';
-	s.dist = 0;
+	s.A.color = 'G';
+	s.A.dist = 0;
 
 	Q = new Queue();
 	Q.enqueue( s );
@@ -20,14 +20,14 @@ function breadthFirstSearch( graph, s ){
 		var u = Q.head();
 		N = u.getLinkedNodes();
 		$.each( N, function(i,v){
-			if( v.color == 'W'){
-				v.dist = u.dist + 1;
-				v.pred = u;
-				v.color = 'G';
+			if( v.A.color == 'W'){
+				v.A.dist = u.A.dist + 1;
+				v.A.pred = u;
+				v.A.color = 'G';
 				Q.enqueue( v );
 			}
 		});
 		Q.pop();
-		u.color = 'K';
+		u.A.color = 'K';
 	}
 }

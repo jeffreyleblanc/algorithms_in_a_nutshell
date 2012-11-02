@@ -9,7 +9,7 @@ function FloydWarshall( graph ){
 	// "Clean" the id's of the Nodes so that they index at 0
 	var count = 0;
 	$.each( NN, function(i,v){
-		v.a_id = count;
+		v.A.id = count;
 		graph.indexToPtr.push( v );
 		count += 1;
 	});
@@ -25,9 +25,9 @@ function FloydWarshall( graph ){
 		N = u.getLinkedNodesOut(); // Only looking for nodes linking 'out'
 		$.each( N, function(i,v){
 			var e = v.getLinkingEdgeByPtr(u);
-			V[u.a_id][v.a_id] = e.currDist;
-			dist[u.a_id][v.a_id] = e.currDist;
-			pred[u.a_id][v.a_id] = u.a_id
+			V[u.A.id][v.A.id] = e.currDist;
+			dist[u.A.id][v.A.id] = e.currDist;
+			pred[u.A.id][v.A.id] = u.A.id
 		});
 	});
 	for( var i=0; i< NN.length; i++)

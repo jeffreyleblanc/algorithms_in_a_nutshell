@@ -8,10 +8,10 @@ function bellmanFord( graph, s ){
 	var E = graph.U.edges.cO.L;
 
 	$.each( V, function(i,v){
-		v.pred = null;
-		v.dist = 1000000;
+		v.A.pred = null;
+		v.A.dist = 1000000;
 	});
-	s.dist = 0;
+	s.A.dist = 0;
 
 	//! check implementation
 	var n = V.length;
@@ -21,20 +21,20 @@ function bellmanFord( graph, s ){
 			var v = e.n1();
 			var u = e.n2();
 			
-			var newLen = u.dist + e.currDist;
-			if( newLen < v.dist ){
+			var newLen = u.A.dist + e.currDist;
+			if( newLen < v.A.dist ){
 				if( i == n )
 					$.C( "NEGATIVE CYCLE" );
-				v.dist = newLen
-				v.pred = u;
+				v.A.dist = newLen
+				v.A.pred = u;
 			}
 
-			newLen = v.dist + e.currDist;
-			if( newLen < u.dist ){
+			newLen = v.A.dist + e.currDist;
+			if( newLen < u.A.dist ){
 				if( i == n )
 					$.C( "NEGATIVE CYCLE" );
-				u.dist = newLen
-				u.pred = v;
+				u.A.dist = newLen
+				u.A.pred = v;
 			}
 		});
 	}

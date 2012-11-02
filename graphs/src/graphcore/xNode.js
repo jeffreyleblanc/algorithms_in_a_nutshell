@@ -38,6 +38,8 @@
 			del : function(){ var Q=this;
 				Q.$super();
 			},
+
+		//== Analysis =====================================================//
 			
 		///-- Packets -----------------------------------//
 		
@@ -73,13 +75,13 @@
 			},
 
 			a_setColor : function(){var Q=this;
-				if( Q.color == 'W' )
+				if( Q.A.color == 'W' )
 					Q.P.fillcolor.RGBA(255,255,255,0.75);
-				if( Q.color == 'G' )
+				if( Q.A.color == 'G' )
 					Q.P.fillcolor.RGBA(120,120,120,0.75);
-				if( Q.color == 'K' )
+				if( Q.A.color == 'K' )
 					Q.P.fillcolor.RGBA(50,50,50,0.75);
-				if( Q.color == '-' )
+				if( Q.A.color == '-' )
 					Q.P.fillcolor.RGBA(0,0,200,0.5);
 			},
 
@@ -97,10 +99,10 @@
 				*/
 
 				// Breadth First
-				if( Q.pred == null )
-					Q.ctx.fillText(Q.a_id+ ' # '+Q.dist,0,0);
+				if( Q.A.pred == null )
+					Q.ctx.fillText(Q.A.id+ ' # '+Q.A.dist,0,0);
 				else
-					Q.ctx.fillText(Q.a_id+' > '+Q.pred.a_id+ ' # '+Q.dist,0,0);
+					Q.ctx.fillText(Q.A.id+' > '+Q.A.pred.A.id+ ' # '+Q.A.dist,0,0);
 
 			},
 			
