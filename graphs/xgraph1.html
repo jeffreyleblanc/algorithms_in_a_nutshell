@@ -10,16 +10,20 @@
 	<link rel="stylesheet" type="text/css" href="css/jUi.css" />
 	
 	<!-- Graph src links -->
-	<script src="src/graphcore/aNode.js"></script>
-	<script src="src/graphcore/aEdge.js"></script>
-	<script src="src/graphcore/aGraph.js"></script>
-	<script src="src/graphcore/xNode.js"></script>
-	<script src="src/graphcore/xEdge.js"></script>
-	<script src="src/graphcore/xGraph.js"></script>
+	<script src="dep/graphcore/aNode.js"></script>
+	<script src="dep/graphcore/aEdge.js"></script>
+	<script src="dep/graphcore/aGraph.js"></script>
+	<script src="dep/graphcore/xNode.js"></script>
+	<script src="dep/graphcore/xEdge.js"></script>
+	<script src="dep/graphcore/xGraph.js"></script>
 	<!-- DataStructures -->
 	<script src="src/datastructures/Queue.js"></script>
 	<script src="src/datastructures/PriorityQueue.js"></script>
 	<script src="src/datastructures/Matrix.js"></script>
+
+	<script src="src/graphcore/algNode.js"></script>
+	<script src="src/graphcore/algEdge.js"></script>
+	<script src="src/graphcore/algGraph.js"></script>
 	<!-- Algorithms -->
 	<script src="src/algorithms/depthFirstSearch.js"></script>
 	<script src="src/algorithms/breadthFirstSearch.js"></script>
@@ -54,13 +58,13 @@
 		var graph;
 		var p; var p2;
 		function loadGraph(){
-			graph = new xGraph();
+			graph = new algGraph();
 			holder.addC( graph );
 			
-			p = new xNode();
+			p = new algNode();
 			graph.addNode( p );
 			
-			p2 = new xNode();
+			p2 = new algNode();
 			p2.pos( vVec(100,100) );
 			graph.addNode( p2 );
 			
@@ -94,7 +98,7 @@
 				holder.addC( graph ); 		//-- Add to the holder
 			} else {
 				jsonClear();
-				graph = new xGraph();
+				graph = new algGraph();
 				holder.addC( graph );
 			}
 		};
@@ -181,7 +185,7 @@
 				if( graph.t != null && graph.s != null ){
 					var path = graph.getPathBetween( graph.s, graph.t );
 					$.each( path.nodes, function(k,v){
-						$.C( v.a_id );
+						$.C( v.A.id );
 					});
 					$.each( path.edges, function(k,e){
 						$.C( e.id() );

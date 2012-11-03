@@ -38,8 +38,6 @@
 			del : function(){ var Q=this;
 				Q.$super();
 			},
-
-		//== Analysis =====================================================//
 			
 		///-- Packets -----------------------------------//
 		
@@ -60,50 +58,15 @@
 		//-- Render -------------------------------------------//
 			
 			render : function(){ var Q=this;					
-				Q.a_setColor();
 				Q.renderCircle();
 				if( Q.readytolink )
 					Q.rndr.circle(vVec(), Q.P.radius+4,null,Q.P.readytolinkcolor.RGBA(),2);
-
-				Q.a_render();
 			},
 			
 			renderCircle : function(){var Q=this;
 				Q.rndr.circle(vVec(), Q.P.radius, Q.P.fillcolor.RGBA());
 				if(Q.mouseInside)
 					Q.rndr.circle(vVec(), Q.P.radius+2,null,Q.P.strokecolor.RGBA(),2);
-			},
-
-			a_setColor : function(){var Q=this;
-				if( Q.A.color == 'W' )
-					Q.P.fillcolor.RGBA(255,255,255,0.75);
-				if( Q.A.color == 'G' )
-					Q.P.fillcolor.RGBA(120,120,120,0.75);
-				if( Q.A.color == 'K' )
-					Q.P.fillcolor.RGBA(50,50,50,0.75);
-				if( Q.A.color == '-' )
-					Q.P.fillcolor.RGBA(0,0,200,0.5);
-			},
-
-			a_render : function(){var Q=this
-
-				// Render Text
-				this.ctx.fillStyle = 'White';
-
-				/*
-				//Depth First
-				if( Q.pred == null )
-					Q.ctx.fillText(Q.a_id+ ' # '+Q.finished,0,0);
-				else
-					Q.ctx.fillText(Q.a_id+' > '+Q.pred.a_id+ ' # '+Q.finished,0,0);
-				*/
-
-				// Breadth First
-				if( Q.A.pred == null )
-					Q.ctx.fillText(Q.A.id+ ' # '+Q.A.dist,0,0);
-				else
-					Q.ctx.fillText(Q.A.id+' > '+Q.A.pred.A.id+ ' # '+Q.A.dist,0,0);
-
 			},
 			
 		//-- Update -------------------------------------------//
@@ -125,9 +88,6 @@
 				mousedown : function( evt ){var Q=this;
 					//-- could do setFocus...
 					Q.cnvs.inspector.attach(Q);
-
-					//! FOR ANALYSIS
-					Q.U.graph.setFocus( Q );
 				},
 				
 				mouseup : function( evt ){var Q=this;

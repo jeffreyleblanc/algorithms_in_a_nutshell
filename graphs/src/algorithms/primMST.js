@@ -25,6 +25,7 @@ function primMST( graph ){
 
 			if( PQ.includes( v )){
 				var e = u.getLinkingEdgeByPtr( v );
+				$.C( e.id() );
 				var w = e.currDist;
 				if( w < v.A.dist ){
 					v.A.pred = u;

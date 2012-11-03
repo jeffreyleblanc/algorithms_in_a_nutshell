@@ -29,8 +29,6 @@
 			del : function(){var Q=this;	
 				Q.$super();
 			},
-
-		//== Analysis =====================================================//
 		
 		///-- Packets ----------------------------------------///
 		
@@ -66,7 +64,7 @@
 					p.renderF( Q, offset );
 				});
 			},
-
+		
 		//-- Render -------------------------------------------//
 		
 			//-- Overload renderTree to set rotation to node orientation
