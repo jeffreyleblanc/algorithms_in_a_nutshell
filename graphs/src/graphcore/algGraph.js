@@ -35,14 +35,9 @@
 				var npath = []	// save the nodes we travese
 				var epath = []; // save the edges we traverse
 
-				console.log( Q.predMatrix );
-				console.log( Q.predMatrix.E[1][1] ); 
-
 				npath.push( t );
 				while( t != s ){
-					t_id = Q.predMatrix.E[s.A.id][t.A.id];
-					$.C('stuff');
-					$.C(t_id);
+					t_id = Q.predMatrix.get(s.A.id, t.A.id);
 					if( t_id == -1 ) return null;
 					var tmpE = t.getLinkingEdgeByPtr( Q.indexToPtr[t_id] );
 					t = Q.indexToPtr[t_id];

@@ -2,60 +2,42 @@
 
 function FloydWarshall( graph ){
 
-	var log = true;
-
-	var NN = graph.U.nodes.cO.L;
+	var N = graph.U.nodes.cO.L;
 
 	// "Clean" the id's of the Nodes so that they index at 0
 	var count = 0;
-	$.each( NN, function(i,v){
+	$.each( N, function(i,v){
 		v.A.id = count;
 		graph.indexToPtr.push( v );
 		count += 1;
 	});
 
-	// Make a l by l array
-	var V = new algMatrix().makeNbyN( NN.length, -1 );
-	var dist = new algMatrix().makeNbyN( NN.length, 100000000 );
-	var pred = new algMatrix().makeNbyN( NN.length, -1 );
-	//printNbyN( V );
+	// Make Matrices
+	var V = new algMatrix().makeNbyN( N.length, -1 );
+	var dist = new algMatrix().makeNbyN( N.length, 100000000 );
+	var pred = new algMatrix().makeNbyN( N.length, -1 );
 
 	// Setup the Matrices
-	$.each( NN, function(i,u){
-		N = u.getLinkedNodesOut(); // Only looking for nodes linking 'out'
-		$.each( N, function(i,v){
+	$.each( N, function(i,u){
+		oN = u.getLinkedNodesOut(); // Only looking for nodes linking 'out'
+		$.each( oN, function(i,v){
 			var e = v.getLinkingEdgeByPtr(u);
-			V.E[u.A.id][v.A.id] = e.currDist;
-			dist.E[u.A.id][v.A.id] = e.currDist;
-			pred.E[u.A.id][v.A.id] = u.A.id
+			V.set( u.A.id, v.A.id, e.currDist);
+			dist.set( u.A.id, v.A.id, e.currDist);
+			pred.set( u.A.id, v.A.id, u.A.id);
 		});
 	});
-	for( var i=0; i< NN.length; i++)
-		dist.E[i][i] = 0;
-
-	// Log the initial setup
-	if( log ){
-		$.C('INIT===================================');
-		$.C('V');
-		//printNbyN( V );
-		V.print();
-		$.C('dist');
-		//printNbyN( dist );
-		dist.print();
-		$.C('pred');
-		//printNbyN( pred );
-		pred.print();
-		$.C('END INIT===================================');
-	}
+	for( var i=0; i< N.length; i++)
+		dist.set( i, i, 0);
 
 	// Do it
 	for( var t=0; t< V.E.length; t++){
 		for( var u=0; u< V.E.length; u++){
 			for( var v=0; v< V.E.length; v++){
-				var newLen = dist.E[u][t] + dist.E[t][v];
-				if( newLen < dist.E[u][v]){
-					dist.E[u][v] = newLen;
-					pred.E[u][v] = pred.E[t][v];
+				var newLen = dist.get(u,t) + dist.get(t,v);
+				if( newLen < dist.get(u,v) ) {
+					dist.set(u,v, newLen);
+					pred.set(u,v, pred.get(t,v) );
 				}
 			}
 		}
@@ -65,15 +47,4 @@ function FloydWarshall( graph ){
 	graph.predMatrix = pred;
 	graph.distMatrix = dist;
 	
-	// log the Results
-	if( log ){
-		$.C('RESULT ===================================');
-		$.C('dist');
-		//printNbyN( dist );
-		dist.print();
-		$.C('pred');
-		//printNbyN( pred );
-		pred.print();
-		$.C('END RESULT ===================================');
-	}
 };
