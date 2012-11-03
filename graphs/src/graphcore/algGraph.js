@@ -21,12 +21,46 @@
 					Q.predMatrix = null;
 					Q.distMatrix = null;
 				/// move to aGraph
-					Q.s = null; // sink node;
-					Q.t = null; // target node;
+					Q.U._s = null; // sink node;
+					Q.U._t = null; // target node;
+
+					Q.nrSource = null;
+					Q.nrSink = null;
 			},
-			
+
+			postInitialize : function(){var Q=this;
+				Q.$super();
+				// Make the nodeRings
+				Q.nrSource = new algNodeRing();
+				Q.nrSource.graph = Q;
+				Q.nrSource.tgt = 'source';
+				Q.addC( Q.nrSource, false );
+				Q.nrSource.pos( vVec(35,35) );
+				Q.nrSource.P.strokecolor = new vColor(0, 200, 0, 0.5);
+				
+				Q.nrSink = new algNodeRing();
+				Q.nrSink.graph = Q;
+				Q.nrSink.tgt = 'sink';
+				Q.addC( Q.nrSink, false );
+				Q.nrSink.pos( vVec(100,35) );
+				Q.nrSink.P.strokecolor = new vColor(200, 0, 0, 0.5);
+
+			},
 
 		//== Analysis =====================================================//
+
+			source : function( n ){
+				if( n == undefined )
+					return this.U._s;
+				else
+					this.U._s = n;
+			},
+			sink : function( n ){
+				if( n == undefined )
+					return this.U._t;
+				else
+					this.U._t = n;
+			},
 
 			getPathBetween : function( s, t){var Q=this;
 				var s_id = s.A.id;
@@ -66,11 +100,11 @@
 				Q.$super();
 
 				//-- render focus
-					if( Q.s !=  null ){
-						Q.rndr.circle(Q.s.pos(),30,null,'green',3);
+					if( Q.U._s !=  null ){
+						Q.rndr.circle( Q.U._s.pos() ,30,null,'green',3);
 					}
-					if( Q.t !=  null ){
-						Q.rndr.circle(Q.t.pos(),30,null,'yellow',3);
+					if( Q.U._t !=  null ){
+						Q.rndr.circle( Q.U._t.pos() ,30,null,'yellow',3);
 					}
 			},
 

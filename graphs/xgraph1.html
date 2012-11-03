@@ -24,6 +24,7 @@
 	<script src="src/graphcore/algNode.js"></script>
 	<script src="src/graphcore/algEdge.js"></script>
 	<script src="src/graphcore/algGraph.js"></script>
+	<script src="src/graphcore/algNodeRing.js"></script>
 	<!-- Algorithms -->
 	<script src="src/algorithms/depthFirstSearch.js"></script>
 	<script src="src/algorithms/breadthFirstSearch.js"></script>
@@ -173,17 +174,15 @@
 				FloydWarshall( graph );
 			});
 
-			$('#set_sink').click(function(){
-				if( graph.focus != null )
-					graph.s = graph.focus;
+			$('#set_source').click(function(){
+				graph.source( graph.focus );
 			});
-			$('#set_target').click(function(){
-				if( graph.focus != null )
-					graph.t = graph.focus;
+			$('#set_sink').click(function(){
+				graph.sink( graph.focus );
 			});
 			$('#path').click(function(){
-				if( graph.t != null && graph.s != null ){
-					var path = graph.getPathBetween( graph.s, graph.t );
+				if( graph.source() != null && graph.sink() != null ){
+					var path = graph.getPathBetween( graph.source(), graph.sink() );
 					console.log( path );
 					$.each( path.nodes, function(k,v){
 						$.C( v.A.id );
@@ -233,8 +232,8 @@
 	<span id="bf">BellmanFord</span> |
 	<span id="mst">primMST</span> | 
 	<span id="fw">FloydWarshall</span> || 
-	<span id="set_sink">sink</span> |
-	<span id="set_target">target</span> |
+	<span id="set_source">setSource</span> |
+	<span id="set_sink">setSink</span> |
 	<span id="path">PATH!</span> |
 	<span id="reset_color">Reset Color</span>
 
