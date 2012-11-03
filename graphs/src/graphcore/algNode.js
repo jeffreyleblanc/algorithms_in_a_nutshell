@@ -24,10 +24,27 @@
 					Q.A.finished = -1;			// done finding
 					Q.A.color = '-'; 			//'W', 'G', 'K' : color, used to mark in searching
 					Q.A.dist = 0;				// distance calculations
+
+
 				
+				
+			},
+
+			postInitialize : function(){var Q=this;
+				//-- Make a popup text
+					Q.txt = new j$();
+					Q.txt.$e.css({"position":"absolute","font-size":"12px"})
+						.addClass("rokkit");
+					Q.txt.hide();
+					Q.addC( Q.txt, false );
+					Q.txt.$e.html( "YAK" );
+				//var w = 0.5*( Q.txt.$e.w() );
+				//.addN(vVec(w,-20))) );
 			},
 			
 			del : function(){ var Q=this;
+				Q.txt.$e.remove();
+				Q.txt.$e = null;
 				Q.$super();
 			},
 
@@ -71,12 +88,17 @@
 				return resulte;
 			},
 
+
+
 		//-- Render -------------------------------------------//
 			
 			render : function(){ var Q=this;
 				Q.$super();				
 				Q.a_setColor();
 				Q.a_render();
+
+				if( Q.txt.visible)
+					Q.txt.$e.xy( Q.localToScreen().addN(vVec(-Q.P.radius,-2*Q.P.radius )) );
 			},
 
 			a_setColor : function(){var Q=this;
@@ -111,6 +133,7 @@
 
 			},
 
+
 		//-- Events ---------------------------------//
 
 			// For some reason this is not inherited properlly....
@@ -137,7 +160,15 @@
 							Q.U.graph.memberReportClick(Q);
 							break;
 					}
-				}
+				},
+
+				mouseenter : function( evt ){var Q=this;
+					Q.txt.show(); //$e.fadeIn(100);
+				},
+
+				mouseleave : function( evt ){var Q=this;
+					Q.txt.hide(); //$e.fadeOut(100);
+				},
 
 			}}
 	

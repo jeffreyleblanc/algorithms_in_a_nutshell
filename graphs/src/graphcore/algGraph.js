@@ -47,16 +47,28 @@
 
 			},
 
+			del : function(){var Q=this;
+				N = Q.U.nodes.cO.L;
+				for( var i=N.length-1; i>-1; i--){
+					N[i].del();
+				}
+				Q.U.nodes.clearC();
+				Q.nrSink.del();
+				Q.nrSource.del();
+				
+				this.$super();
+			},
+
 		//== Analysis =====================================================//
 
 			source : function( n ){
-				if( n == undefined )
+				if( n === undefined )
 					return this.U._s;
 				else
 					this.U._s = n;
 			},
 			sink : function( n ){
-				if( n == undefined )
+				if( n === undefined )
 					return this.U._t;
 				else
 					this.U._t = n;
@@ -99,13 +111,13 @@
 			render : function(){ var Q=this;
 				Q.$super();
 
-				//-- render focus
-					if( Q.U._s !=  null ){
-						Q.rndr.circle( Q.U._s.pos() ,30,null,'green',3);
-					}
-					if( Q.U._t !=  null ){
-						Q.rndr.circle( Q.U._t.pos() ,30,null,'yellow',3);
-					}
+				// Render focuses
+				if( Q.U._s !=  null ){
+					Q.rndr.circle( Q.U._s.pos() ,30,null,'green',3);
+				}
+				if( Q.U._t !=  null ){
+					Q.rndr.circle( Q.U._t.pos() ,30,null,'yellow',3);
+				}
 			},
 
 		//-- Contains --------------------------------//

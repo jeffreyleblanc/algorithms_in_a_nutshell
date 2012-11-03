@@ -27,6 +27,7 @@
 
 				Q.graph = null;
 				Q.tgt = undefined;
+				Q.node = null;
 				Q.locked = false;
 			},
 
@@ -44,7 +45,17 @@
 			},
 
 			containsPnt : function( vec ){var Q=this;
-				return (vec.lSQ() <= (Q.P.radius*Q.P.radius));
+				var halfWidth = 5.0;
+				var lsq = vec.lSQ();
+				if( lsq > ((Q.P.radius+halfWidth)*(Q.P.radius+halfWidth)) )return false;
+				if( lsq < ((Q.P.radius-halfWidth)*(Q.P.radius-halfWidth)) )return false;
+				return true;
+			},
+
+			update : function(){var Q=this;
+				// Lock to node if we have one
+				if( Q.locked && Q.node != null )
+					Q.pos( Q.node.pos() );
 			},
 
 		//-- Events ---------------------------------//
@@ -54,6 +65,7 @@
 					// nothing for now
 					if( Q.locked && Q.tgt != undefined ){
 						Q.graph[Q.tgt]( null );
+						Q.node = null;
 						Q.locked = false;
 					}
 				},
@@ -61,6 +73,7 @@
 				mouseup : function( evt ){var Q=this
 					if( Q.graph == null ) return;
 
+					var minToLock = 50.0 * 50.0;
 					var min = 2000.0 * 2000.0;
 					var closest = null;
 					Q.graph.eachNodes( function(k,n){
@@ -76,8 +89,15 @@
 					$.C( Math.sqrt(min) );
 
 					if( Q.tgt != undefined ){
-						Q.graph[Q.tgt]( closest );
-						Q.locked = true;
+						if( min < minToLock){
+							Q.graph[Q.tgt]( closest );
+							Q.node = closest;
+							Q.locked = true;
+						}else{
+							Q.graph[Q.tgt]( null );
+							Q.node = null;
+							Q.locked = false;
+						}
 					}
 				}
 			}}
