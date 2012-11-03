@@ -15,9 +15,9 @@ function FloydWarshall( graph ){
 	});
 
 	// Make a l by l array
-	V = makeNbyN( NN.length, -1 );
-	dist = makeNbyN( NN.length, 100000000 );
-	pred = makeNbyN( NN.length, -1 );
+	var V = new algMatrix().makeNbyN( NN.length, -1 );
+	var dist = new algMatrix().makeNbyN( NN.length, 100000000 );
+	var pred = new algMatrix().makeNbyN( NN.length, -1 );
 	//printNbyN( V );
 
 	// Setup the Matrices
@@ -25,32 +25,37 @@ function FloydWarshall( graph ){
 		N = u.getLinkedNodesOut(); // Only looking for nodes linking 'out'
 		$.each( N, function(i,v){
 			var e = v.getLinkingEdgeByPtr(u);
-			V[u.A.id][v.A.id] = e.currDist;
-			dist[u.A.id][v.A.id] = e.currDist;
-			pred[u.A.id][v.A.id] = u.A.id
+			V.E[u.A.id][v.A.id] = e.currDist;
+			dist.E[u.A.id][v.A.id] = e.currDist;
+			pred.E[u.A.id][v.A.id] = u.A.id
 		});
 	});
 	for( var i=0; i< NN.length; i++)
-		dist[i][i] = 0;
+		dist.E[i][i] = 0;
 
 	// Log the initial setup
 	if( log ){
+		$.C('INIT===================================');
 		$.C('V');
-		printNbyN( V );
+		//printNbyN( V );
+		V.print();
 		$.C('dist');
-		printNbyN( dist );
+		//printNbyN( dist );
+		dist.print();
 		$.C('pred');
-		printNbyN( pred );
+		//printNbyN( pred );
+		pred.print();
+		$.C('END INIT===================================');
 	}
 
 	// Do it
-	for( var t=0; t< V.length; t++){
-		for( var u=0; u< V.length; u++){
-			for( var v=0; v< V.length; v++){
-				var newLen = dist[u][t] + dist[t][v];
-				if( newLen < dist[u][v]){
-					dist[u][v] = newLen;
-					pred[u][v] = pred[t][v];
+	for( var t=0; t< V.E.length; t++){
+		for( var u=0; u< V.E.length; u++){
+			for( var v=0; v< V.E.length; v++){
+				var newLen = dist.E[u][t] + dist.E[t][v];
+				if( newLen < dist.E[u][v]){
+					dist.E[u][v] = newLen;
+					pred.E[u][v] = pred.E[t][v];
 				}
 			}
 		}
@@ -62,10 +67,13 @@ function FloydWarshall( graph ){
 	
 	// log the Results
 	if( log ){
-		$.C('===================================');
+		$.C('RESULT ===================================');
 		$.C('dist');
-		printNbyN( dist );
+		//printNbyN( dist );
+		dist.print();
 		$.C('pred');
-		printNbyN( pred );
+		//printNbyN( pred );
+		pred.print();
+		$.C('END RESULT ===================================');
 	}
 };

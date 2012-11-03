@@ -184,6 +184,7 @@
 			$('#path').click(function(){
 				if( graph.t != null && graph.s != null ){
 					var path = graph.getPathBetween( graph.s, graph.t );
+					console.log( path );
 					$.each( path.nodes, function(k,v){
 						$.C( v.A.id );
 					});
