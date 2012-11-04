@@ -24,9 +24,6 @@
 					
 				//-- Directionality
 					Q.P.dir = '-'; //--  n1---n2, '-', '<', '>', '|'
-
-					Q.flow = 0;
-					Q.P.capacity = 100;
 			},
 			
 			//?-- Delete Children Option?

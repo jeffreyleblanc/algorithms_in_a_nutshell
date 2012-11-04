@@ -20,20 +20,6 @@
 					Q.U.edges = new aList();
 				//-- Pointer to Controller
 					Q.U.graph = null; //-- Pointer to graph
-
-				//-- ANALYSIS TOOLS
-
-					Q.pred = null;//-1;
-					Q.discovered = -1;
-					Q.finished = -1;
-					Q.color = '-'; //'W', 'G', 'K'
-
-					Q.dist = 0;
-
-					Q.a_id = Q.$class.$count;
-
-					Q.I = null; // for FordFulkerson path search
-					Q.Idir = undefined; // For FordFulkerson search
 			},
 			
 			//?-- Delete Children Option?
@@ -80,40 +66,6 @@
 				});
 				return L;
 			},
-
-			/* TEST > */
-
-			//--  n1---n2, '-', '<', '>', '|'
-
-			// n1
-
-			getLinkedNodesOut : function(){var Q=this;
-				var L = [];
-				Q.U.edges.each( function(i,e){
-					var tmpN = e.n1();
-					if( 
-						( tmpN == Q && ( e.dir() == '-' || e.dir() == '>')) ||
-						( tmpN != Q && ( e.dir() == '-' || e.dir() == '<'))
-					){
-						L.push( e.getOther(Q) ); }
-				});
-				return L;
-			},
-
-			getLinkedNodesIn : function(){var Q=this;
-				var L = [];
-				Q.U.edges.each( function(i,e){
-					var tmpN = e.n1();
-					if( 
-						( tmpN == Q && ( e.dir() == '-' || e.dir() == '<')) ||
-						( tmpN != Q && ( e.dir() == '-' || e.dir() == '>'))
-					){
-						L.push( e.getOther(Q) ); }
-				});
-				return L;
-			},
-
-			/* < TEST */
 			
 			getLinkingEdge : function(n_idx, filter){var Q=this;
 				return ($.ISatype(n_idx))?
@@ -121,14 +73,12 @@
 					Q.getLinkingEdgeByIdx(n_idx, filter);
 			},
 			
-			//! FIXED ERROR HERE SHOULD FIX IN PHYCORE
 			getLinkingEdgeByPtr : function(n){var Q=this;
 				if(!n) return null;if(n==Q)return null;
 				var resulte = null;
 				Q.U.edges.each( function(i,e){
-					if( e.has(n) ){
+					if( e.has(n) )
 						resulte = e; return false; //-- Force exit
-					}
 				});
 				return resulte;
 			},

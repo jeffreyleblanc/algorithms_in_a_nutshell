@@ -87,26 +87,8 @@
 				Q.renderDirection();
 				///--
 				Q.renderPackets();
-
-				Q.renderFlow();
 			},
 		
-
-			//
-
-			renderFlow : function(){var Q=this;
-				Q.ctx.save();
-				Q.ctx.translate( 0.5*Q.currDist , 0.0 );
-				
-				// Render Text
-				this.ctx.fillStyle = 'White';
-				Q.ctx.fillText(Q.flow+ ' / '+Q.P.capacity,0,0);
-
-				Q.ctx.restore();
-			},
-
-			//
-
 			renderLine : function(currD){var Q=this;
 				if(!Q.mouseInside)
 					Q.rndr.line(vVec(),vVec(currD,0),Q.color.RGBA(),2,"round");

@@ -1,3 +1,7 @@
+/*
+	Calculates maximum flow from a source to a sink through
+	a directed graph
+*/
 
 function FordFulkerson( graph ){
 
@@ -6,17 +10,18 @@ function FordFulkerson( graph ){
 
 function compute( graph ){
 
-	while( findAugmentingPath( graph)){
-		processPath( path );
+	while( findAugmentingPath( graph ) ){
+		processPath();
 	}
-}
+};
 
-function processPath( path ){
+// Note that the path is encoded in the graph nodes, and so not passed in
+function processPath( ){
 
 	// Step 1 : determine maximum additional flow along the path
-	var v =  graph.t;
+	var v =  graph.sink();
 	var delta = 100000000;
-	while( v != graph.s ){
+	while( v != graph.source() ){
 
 		// get node previous to v in path we assume path ( sink to source )
 		var u = v.I;
@@ -34,11 +39,11 @@ function processPath( path ){
 			delta = t;
 
 		v = u;
-	}
+	};
 
 	// Step 2 : assign the maximum additional flow along the path
-	v = graph.t;
-	while( v != graph.s ){
+	v = graph.sink();
+	while( v != graph.source() ){
 
 		// get node previous to v in path we assume path ( sink to source )
 		var u = v.I;
@@ -54,7 +59,7 @@ function processPath( path ){
 
 		v = u;
 	}
-}
+};
 
 function findAugmentingPath( graph ) {
 
@@ -66,7 +71,7 @@ function findAugmentingPath( graph ) {
 
     // Begin the potential augmenting path at source with as much flow as possible.
 	var path = [];
-	path.push( graph.s );
+	path.push( graph.source() );
 
 	// Process forward edges from u; then try backward edges
 	while( path.length != 0 ){
@@ -84,7 +89,7 @@ function findAugmentingPath( graph ) {
 			if( v.I == null && e.P.capacity > e.flow ){
 				v.I = u;
 				v.Idir = 'FORWARD';
-				if( v == graph.t ){ 
+				if( v == graph.sink() ){ 
 					return true; // We have found a augmentation path
 				}
 				path.push( v );
@@ -107,7 +112,7 @@ function findAugmentingPath( graph ) {
 	}
 	// No Path found
 	return false;
-}
+};
 
 
 

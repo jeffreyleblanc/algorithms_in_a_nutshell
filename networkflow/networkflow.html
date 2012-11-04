@@ -10,16 +10,20 @@
 	<link rel="stylesheet" type="text/css" href="css/jUi.css" />
 	
 	<!-- Graph src links -->
-	<script src="src/graphcore/aNode.js"></script>
-	<script src="src/graphcore/aEdge.js"></script>
-	<script src="src/graphcore/aGraph.js"></script>
-	<script src="src/graphcore/xNode.js"></script>
-	<script src="src/graphcore/xEdge.js"></script>
-	<script src="src/graphcore/xGraph.js"></script>
+	<script src="dep/graphcore/aNode.js"></script>
+	<script src="dep/graphcore/aEdge.js"></script>
+	<script src="dep/graphcore/aGraph.js"></script>
+	<script src="dep/graphcore/xNode.js"></script>
+	<script src="dep/graphcore/xEdge.js"></script>
+	<script src="dep/graphcore/xGraph.js"></script>
 	<!-- DataStructures -->
-	<script src="src/datastructures/Queue.js"></script>
-	<script src="src/datastructures/PriorityQueue.js"></script>
-	<script src="src/datastructures/Matrix.js"></script>
+	<script src="src/graphcore/algNode.js"></script>
+	<script src="src/graphcore/algEdge.js"></script>
+	<script src="src/graphcore/algGraph.js"></script>
+	<script src="src/graphcore/algNodeRing.js"></script>
+	<script src="src/graphcore/flwNode.js"></script>
+	<script src="src/graphcore/flwEdge.js"></script>
+	<script src="src/graphcore/flwGraph.js"></script>
 	<!-- Algorithms -->
 	<script src="src/algorithms/FordFulkerson.js"></script>
 	<!-- Data -->
@@ -49,13 +53,13 @@
 		var graph;
 		var p; var p2;
 		function loadGraph(){
-			graph = new xGraph();
+			graph = new algGraph();
 			holder.addC( graph );
 			
-			p = new xNode();
+			p = new algNode();
 			graph.addNode( p );
 			
-			p2 = new xNode();
+			p2 = new algNode();
 			p2.pos( vVec(100,100) );
 			graph.addNode( p2 );
 			
@@ -89,7 +93,7 @@
 				holder.addC( graph ); 		//-- Add to the holder
 			} else {
 				jsonClear();
-				graph = new xGraph();
+				graph = new algGraph();
 				holder.addC( graph );
 			}
 		};
@@ -149,20 +153,6 @@
 				FordFulkerson( graph );
 			});
 
-			$('#set_sink').click(function(){
-				if( graph.focus != null )
-					graph.s = graph.focus;
-			});
-			$('#set_target').click(function(){
-				if( graph.focus != null )
-					graph.t = graph.focus;
-			});
-			$('#reset_color').click(function(){
-				graph.eachEdges( function(i,e){
-					e.color.RGBA(50,100,100,0.5);
-				});
-			});
-			
 		});
 		
 </script>
@@ -173,33 +163,37 @@
 <body>
 
 <!-- UI -->
+
 	<span id="state">
-	STATE: 
-	<span id="interact">interact</span> |
-	<span id="link">link</span> |
-	<span id="del">delete</span> |
+	<span class='left-title'> Edit </span> 
+	<span id="interact" class="btn">interact</span> |
+	<span id="link" class="btn">link</span> |
+	<span id="del" class="btn">delete</span> |
 	</span>
-	JSON:
-	<span id="clear">empty graph</span> |
-	<span id="popjson">pop json</span> |
-	<span id="popjsonpretty">pop json pretty</span> |
-	<input id="jsonEntry" type="text"> |
-	<span id="loadjson">load json</span>  |
-	INSPECTOR:
-	<span id="inspector">show</span>
+	inspector <span id="inspector">show</span>
+	
+	<br>
+	<span class='left-title'> Json </span>
+	<input class="inspectff" id="jsonEntry" type="text" > |
+	<span id="loadjson" class="btn">load json</span>  |
+	<span id="popjson" class="btn">pop json</span> |
+	<span id="popjsonpretty" class="btn">pop json pretty</span>
+
 
 	<br>
-	<span id="example">ExampleGraph</span> | 
-	<span id="fordfulkerson">FordFulkerson</span> || 
-	<span id="set_sink">sink</span> |
-	<span id="set_target">target</span> |
-	<span id="path">PATH!</span> |
-	<span id="reset_color">Reset Color</span>
-
+	<span class='left-title'> Graphs </span>
+	<span id="example" class="btn">ExampleGraph</span> |
+	<span id="clear" class="btn">empty graph</span>
+	
+	<br>
+	<span class='left-title'> Algorithms </span>
+	<span id="fordfulkerson" class="btn" >FordFulkerson</span>
+	<br><br>
 <!-- Canvas -->
-	<div id="fps">fps</div>
+	
 	<div id="holder"></div> <!-- Holds the Inspector -->
 	<canvas id='pad' width='800' height='600'></canvas>	
+	<div id="fps">fps</div>
 	
 </body> 
 </html> 

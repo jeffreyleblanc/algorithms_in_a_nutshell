@@ -29,9 +29,6 @@
 					Q.MSG = null;
 					
 					Q.draggable =false;////////////
-
-					Q.s = null; // sink node;
-					Q.t = null; // target node;
 			},
 			
 			postInitialize : function(){var Q=this;
@@ -69,13 +66,6 @@
 					Q.renderInspectorTag();
 					if( Q.msgREADY )
 						Q.renderWaitingMessage();
-				//-- render focus
-					if( Q.s !=  null ){
-						Q.rndr.circle(Q.s.pos(),30,null,'green',3);
-					}
-					if( Q.t !=  null ){
-						Q.rndr.circle(Q.t.pos(),30,null,'yellow',3);
-					}
 			},
 			
 			renderInspectorTag : function(){ var Q=this;
