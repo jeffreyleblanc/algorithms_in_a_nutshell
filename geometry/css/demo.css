@@ -1,15 +1,12 @@
 /*== Core Html =================================*/
 
 	body {
-		background-color: white;
+		background-color: #BBB;
 		font-family: Helvetica, sans serif;
-		font-size: 13px;
+		font-size: 11px;
 		color: #555;
 		margin-left: 50px;
 	}
-	
-	h1 { font-size: 18px;}
-	h2 { font-size: 14px;}
 	
 	a{
 		color: #0066CC;
@@ -19,59 +16,56 @@
 	a:hover {
 		text-decoration: underline;
 	}
-	
-/*== UI =================================*/
-	
-	.on{
-		text-decoration: underline;
+
+
+	.jInspectorAlg{
+		padding: 2px;
+		font-size: 8px;
+		color: #333;
+		font-family: pf_tempesta_seven, monospace;
+		background-color: rgba(150,150,150,0.95);
+		position:absolute;
+		z-index: 2;
 	}
-	
-/*== Pre =================================*/
-	
-	/*-- General ----------------------------*/
-	
-		pre{
-			margin-top:0px;
-			margin-bottom:0px;
-			width: 600px;
-			padding: 2px;
-			/* handle wrapping */
-			white-space: pre-wrap;                 /* CSS3 browsers  */
-			white-space: -moz-pre-wrap !important; /* 1999+ Mozilla  */
-			white-space: -pre-wrap;                /* Opera 4 thru 6 */
-			white-space: -o-pre-wrap;              /* Opera 7 and up */
-			word-wrap: break-word;                 /* IE 5.5+ and up */		
-		}
-	
-		/* SPAN elements with the classes below are added by prettyprint. */
-		.pln { color: #444 }  /* plain text */
-		.str { color: #A00 }  /* string content */
-		.kwd { color: #00A }  /* a keyword */
-		.com { color: #480 }  /* a comment */
-		.typ { color: #444 }  /* a type name */
-		.lit { color: #A00 }  /* a literal value */
-	
-	/*-- Specific ----------------------------*/
-	
-		#classes{
-			margin-left: 24px;
-			width: 700px;
-			padding: 10px;
-			border-left: 3px solid #AAA;
-			background-color: rgb(250,250,250);
-		}
-	
-		#log{
-			margin-left: 24px;
-			width: 700px;
-			padding: 10px;
-			border-left: 3px solid #AAA;
-			background-color: rgb(250,250,250);
-		}
-		#log pre.result{
-			margin-top: 12px;
-			border-left: 8px solid #0066CC;
-			background-color: rgb(230,230,230);
-			padding: 12px;
-			margin-left: 60px;
-		}
+	.jInspectorAlg
+	.textButton{
+		padding:2px;
+		margin-right: 4px;
+		background-color: white;
+		cursor:pointer;
+	}
+
+	.graphAnalysis {
+		background-color: #555;
+		font-family: monospace;
+		padding : 3px;
+		color : #EEE;
+		font-size : 9px;
+	}
+
+	.left-title {
+		display: inline-block; width: 100px;
+		font-weight: bold;
+	}
+
+	.inspectff {
+		font-size:10px;
+		font-family: monospace;
+		line-height: 10px;
+		color: #777;
+		background-color: #eee;
+		border: 0;
+		margin: 0;
+		padding: 0;
+		cursor: pointer;
+		display: inline;
+		-webkit-appearance: none;
+		border-bottom: 1px solid #777;
+	}
+
+	.btn {
+		cursor: pointer;
+	}
+	.btn:hover{
+		color:#2244BB;
+	}

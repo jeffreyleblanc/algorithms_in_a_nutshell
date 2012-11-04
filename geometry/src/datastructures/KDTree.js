@@ -32,10 +32,8 @@
 				
 				Q.root = null;
 				Q.maxDim = undefined;
-
 				Q.entries = [];
 			},
-
 
 			generate : function( points ){var Q=this;
 
@@ -165,6 +163,8 @@
 				Q.root = node;
 			},
 
+		//-- Query and Search -------------------------------------------//
+
 			nearest : function( pnt ){ var Q=this;
 				if (root == null || pnt == null) return null;
 				// find parent node to which pnt would have been inserted. This is our
@@ -191,21 +191,6 @@
 				Q.root.search( testregion, results);
 				return results;
 			}
-/*
-public ArrayList<IMultiPoint> search (IHypercube space) {
-	ArrayList<IMultiPoint> results = new ArrayList<IMultiPoint> (); 
-	
-	if (root == null) {
-		return results;
-	}
-	
-	// search, placing results into 'results'.
-	root.search(space, results);
-	
-	return results;
-}
-*/
-
 			
 	});
 	

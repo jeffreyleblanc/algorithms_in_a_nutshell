@@ -127,13 +127,8 @@
 				ConvexHull( plane );
 			});
 			$('#kdtree_make').click(function(){
-				$.C('Attempt to make the kdtree...');
-				//var kdtree = generateKDTree( plane.getPointsArray() );
 				var kdtree = new KDTree();
 				kdtree.generate( plane.getPointsArray() );
-
-				$.C('MADE THE TREE!!!!');
-
 				// Try 'dumping the tree
 				kdtree.dump();
 				plane.kdtree = kdtree;
@@ -153,31 +148,32 @@
 <body>
 
 <!-- UI -->
-	<span id="state">
-	STATE: 
-	<span id="interact">interact</span> |
-	<span id="link">link</span> |
-	<span id="del">delete</span> |
-	</span>
-	JSON:
-	<span id="clear">empty plane</span> |
-	<span id="popjson">pop json</span> |
-	<span id="popjsonpretty">pop json pretty</span> |
-	<input id="jsonEntry" type="text"> |
-	<span id="loadjson">load json</span>  |
-	INSPECTOR:
-	<span id="inspector">show</span>
-
+	<span class='left-title'> Edit </span>
+	inspector <span id="inspector" class='btn'>show</span>
 	<br>
-	<span id="example">Exampleplane</span> | 
-	<span id="convexhull">ConvexHull</span> | 
-	<span id="kdtree_make">MakeKDTree</span> |
-	<span id="defineregion">defineregion</span>
+
+	<span class='left-title'>Json</span>
+	<span id="clear" class='btn'>empty plane</span> |
+	<span id="popjson" class='btn'>pop json</span> |
+	<span id="popjsonpretty" class='btn'>pop json pretty</span> |
+	<input class="inspectff" id="jsonEntry" type="text" > |
+	<span id="loadjson" class='btn'>load json</span>
+	<br>
+
+	<span class='left-title'>Planes</span>
+	<span id="example" class='btn'>Exampleplane</span>
+	<br>
+
+	<span class='left-title'>Algorithms</span>
+	<span id="convexhull" class='btn'>ConvexHull</span> | 
+	<span id="kdtree_make" class='btn'>MakeKDTree</span> |
+	<span id="defineregion" class='btn'>defineregion</span>
+	<br><br>
 
 <!-- Canvas -->
-	<div id="fps">fps</div>
 	<div id="holder"></div> <!-- Holds the Inspector -->
 	<canvas id='pad' width='800' height='600'></canvas>	
+	<div id="fps">fps</div>
 	
 </body> 
 </html> 
