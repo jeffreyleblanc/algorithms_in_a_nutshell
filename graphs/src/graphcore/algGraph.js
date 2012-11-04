@@ -45,6 +45,19 @@
 				Q.nrSink.pos( vVec(100,35) );
 				Q.nrSink.P.strokecolor = new vColor(200, 0, 0, 0.5);
 
+
+
+			},
+
+			postLink : function(){var Q=this;
+				if( Q.U._s != null ){
+					Q.nrSource.node = Q.U._s;
+					Q.nrSource.locked = true;
+				}
+				if( Q.U._t != null ){
+					Q.nrSink.node = Q.U._t;
+					Q.nrSink.locked = true;
+				}
 			},
 
 			del : function(){var Q=this;

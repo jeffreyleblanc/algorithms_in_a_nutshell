@@ -4,6 +4,9 @@ function FloydWarshall( graph ){
 
 	var N = graph.U.nodes.cO.L;
 
+	// Ready
+	graph.resetColors();
+
 	// "Clean" the id's of the Nodes so that they index at 0
 	var count = 0;
 	$.each( N, function(i,v){

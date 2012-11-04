@@ -4,6 +4,9 @@ function breadthFirstSearch( graph, s ){
 	if( s == null ){ $.C('No source defined!');return; }
 	else $.C('Runnning on '+graph.id()+' '+s.id());
 
+	// Ready
+	graph.resetColors();
+
 	var V = graph.U.nodes.cO.L;
 	$.each( V, function(i,v){
 		v.A.pred = null;

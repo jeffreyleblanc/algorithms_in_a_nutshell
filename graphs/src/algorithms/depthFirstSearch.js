@@ -1,6 +1,10 @@
 
 function dfs_visit( u ){
 
+	// Ready
+	graph.resetColors();
+
+
 	u.A.color = 'G';
 	u.A.discovered = ++window.counter;
 

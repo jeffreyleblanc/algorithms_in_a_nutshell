@@ -4,6 +4,9 @@ function bellmanFord( graph, s ){
 	if( s == null ){ $.C('No source defined!');return; }
 	else $.C('Runnning on '+graph.id()+' '+s.id());
 
+	// Ready
+	graph.resetColors();
+
 	var V = graph.U.nodes.cO.L;
 	var E = graph.U.edges.cO.L;
 
