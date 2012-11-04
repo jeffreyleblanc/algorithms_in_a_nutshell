@@ -1,4 +1,7 @@
-
+/*
+	Computes shortest paths between all nodes.
+	edge weights must be positive but can handle directed edges
+*/
 
 function FloydWarshall( graph ){
 

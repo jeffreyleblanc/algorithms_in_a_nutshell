@@ -68,6 +68,10 @@
 				Q.useCurrDist = true;
 				Q._dist = 1; // used if above is false
 
+
+				Q.A = {};
+				Q.A.edgetype = ''; // Used by DFS
+
 				Q.dirSetter = null;
 			},
 
@@ -120,6 +124,8 @@
 
 				mouseenter : function( evt ){var Q=this;
 					Q.dirSetter.show();
+					// Simple debug for DFS
+					$.C( Q.A.edgetype );
 				},
 
 				mouseleave : function( evt ){var Q=this;

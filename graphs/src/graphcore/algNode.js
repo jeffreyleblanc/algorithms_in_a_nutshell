@@ -22,6 +22,7 @@
 					Q.A.pred = null;			// previous node
 					Q.A.discovered = -1;		// whether a node has been discovered
 					Q.A.finished = -1;			// done finding
+					Q.A.type = ''				// used by DFS
 					Q.A.color = '-'; 			//'W', 'G', 'K' : color, used to mark in searching
 					Q.A.dist = 0;				// distance calculations
 			},

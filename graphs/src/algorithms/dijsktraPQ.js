@@ -1,3 +1,12 @@
+/*
+	Used to compute shortest path between two nodes.
+	In this case we only take in the source, and compute
+	shortest path to all others.
+	This is encoded for each node as pred ( the direction to head in )
+	and dist, the distance of this shortest path.
+	We use the priority Queue implementation here
+	Note, all edges must have positive dist values
+*/
 
 function dijsktraPQ( graph, s, e ){
 

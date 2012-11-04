@@ -1,3 +1,8 @@
+/*
+	Calculates the minimum spanning tree of a graph
+	edges can be directed
+	This means the minimum total distance to connect all nodes
+*/
 
 function primMST( graph ){
 

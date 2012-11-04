@@ -1,3 +1,7 @@
+/*
+	Explores everything 1, then 2, then 3... vertexes out from source.
+	Works for directed and undirected graphs
+*/
 
 function breadthFirstSearch( graph, s ){
 

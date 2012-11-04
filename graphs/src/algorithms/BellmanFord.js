@@ -1,3 +1,8 @@
+/*
+	Similar output to Dijstkra, but can handle negative edge values
+	so long as there are no negative cycles.
+	see page 161 for comparisons
+*/
 
 function bellmanFord( graph, s ){
 
