@@ -5,7 +5,7 @@
 
 ;(function(){var root=this;
 	
-	root.algEdgeSetter = j$.$extend( {
+	root.algEdgeSetter = jUi.$extend( {
 		//-- Class Vars ------------------------------------------------//
 			__classvars__ : {
 				aType : 'algEdgeSetter'
@@ -16,15 +16,37 @@
 			initialize : function(){var Q=this;
 				Q.$super();
 
-				Q.$e.css({"position":"absolute"})
-						.addClass("graphAnalysis")
-						.html( "---" );
+				Q.$e.addClass('jInspectorAlg');
+				Q.buildUiPanels();
+				Q.buildButtons();
 				Q.hide();
+				
+				Q.tgt = null;
+			},
 
-			}
+			buildUiPanels : function(){var Q=this;
+				Q.dflt$(Q.$e);
+				Q.$buttonPanel = Q.createUiPanel('buttonPanel');
+			},
 
-		//-- distance ------------------------------------------------//
-			
+			buildButtons : function(){var Q=this;
+				Q.dflt$(Q.$buttonPanel);
+				Q.createTextButton({
+					html : '<',
+					baseClass : 'textButton',
+					onClick: function(){if(Q.tgt!=null) Q.tgt.dir('<');}
+					});
+				Q.createTextButton({
+					html : '-',
+					baseClass : 'textButton',
+					onClick: function(){if(Q.tgt!=null) Q.tgt.dir('-');}
+					});
+				Q.createTextButton({
+					html : '>',
+					baseClass : 'textButton',
+					onClick: function(){if(Q.tgt!=null) Q.tgt.dir('>');}
+					});
+			}			
 	});
 
 }).call(this);
@@ -52,9 +74,14 @@
 			postInitialize : function(){var Q=this;
 
 				Q.dirSetter = new algEdgeSetter();
+				Q.dirSetter.tgt = Q;
 			},
 
-			//! Need to remove!
+			del : function(){ var Q=this;
+				Q.dirSetter.$e.remove();
+				Q.dirSetter.$e = null;
+				Q.$super();
+			},
 
 		//-- distance ------------------------------------------------//
 

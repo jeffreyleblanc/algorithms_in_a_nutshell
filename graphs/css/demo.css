@@ -17,6 +17,24 @@
 		text-decoration: underline;
 	}
 
+
+	.jInspectorAlg{
+		padding: 2px;
+		font-size: 8px;
+		color: #333;
+		font-family: pf_tempesta_seven, monospace;
+		background-color: rgba(150,150,150,0.95);
+		position:absolute;
+		z-index: 2;
+	}
+	.jInspectorAlg
+	.textButton{
+		padding:2px;
+		margin-right: 4px;
+		background-color: white;
+		cursor:pointer;
+	}
+
 	.graphAnalysis {
 		background-color: #555;
 		font-family: monospace;
