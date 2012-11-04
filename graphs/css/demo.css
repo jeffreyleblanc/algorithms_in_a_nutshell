@@ -1,9 +1,9 @@
 /*== Core Html =================================*/
 
 	body {
-		background-color: white;
+		background-color: #BBB;
 		font-family: Helvetica, sans serif;
-		font-size: 13px;
+		font-size: 11px;
 		color: #555;
 		margin-left: 50px;
 	}
@@ -18,6 +18,38 @@
 	}
 	a:hover {
 		text-decoration: underline;
+	}
+
+	.graphAnalysis {
+		background-color: #555;
+		font-family: monospace;
+		padding : 3px;
+		color : #EEE;
+		font-size : 9px;
+	}
+
+	.left-title {
+		display: inline-block; width: 100px;
+		font-weight: bold;
+	}
+
+	.inspectff {
+		font-size:10px;
+		font-family: monospace;
+		line-height: 10px;
+		color: #777;
+		background-color: #eee;
+		border: 0;
+		margin: 0;
+		padding: 0;
+		cursor: pointer;
+		display: inline;
+		-webkit-appearance: none;
+		border-bottom: 1px solid #777;
+	}
+
+	.btn {
+		cursor: pointer;
 	}
 	
 /*== UI =================================*/

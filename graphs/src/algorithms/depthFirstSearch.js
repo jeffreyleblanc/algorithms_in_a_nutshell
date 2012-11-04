@@ -1,4 +1,21 @@
 
+function dfs_visit( u ){
+
+	u.A.color = 'G';
+	u.A.discovered = ++window.counter;
+
+	N = u.getLinkedNodes();
+	$.each( N, function(i,v){
+		if( v.A.color == 'W'){
+			v.A.pred = u;
+			dfs_visit( v );
+		}
+	});
+
+	u.A.color = 'K';
+	u.A.finished = ++window.counter;
+}
+
 function depthFirstSearch( graph, s ){
 
 	if( s == null ){ $.C('No source defined!');return; }
@@ -19,21 +36,15 @@ function depthFirstSearch( graph, s ){
 		if( v.A.color == 'W')
 			dfs_visit( v );
 	});
+
+	// Post run, assign text
+	$.each( V, function(i,v){
+		v.setMetaText(
+			v.A.pred != null ?
+			'pred : ' + v.A.pred.A.id
+			:
+			'pred : NULL'
+		);
+	});
 };
 
-function dfs_visit( u ){
-
-	u.A.color = 'G';
-	u.A.discovered = ++window.counter;
-
-	N = u.getLinkedNodes();
-	$.each( N, function(i,v){
-		if( v.A.color == 'W'){
-			v.A.pred = u;
-			dfs_visit( v );
-		}
-	});
-
-	u.A.color = 'K';
-	u.A.finished = ++window.counter;
-}

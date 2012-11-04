@@ -2,9 +2,10 @@
 function primMST( graph ){
 
 	//reset edge colors
-	$.each( graph.U.edges.cO.L, function(i,e){
+	/*$.each( graph.U.edges.cO.L, function(i,e){
 		e.color.RGBA(50,100,100,0.5);
-	});
+	});*/
+	graph.resetColors();
 
 	var V = graph.U.nodes.cO.L;
 	$.each( V, function(i,v){

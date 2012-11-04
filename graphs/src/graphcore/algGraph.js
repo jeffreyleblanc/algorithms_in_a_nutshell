@@ -59,6 +59,12 @@
 				this.$super();
 			},
 
+			resetColors : function(){var Q=this;
+				Q.eachEdges( function(i,e){
+					e.color.RGBA(50,100,100,0.5);
+				});
+			},
+
 		//== Analysis =====================================================//
 
 			source : function( n ){

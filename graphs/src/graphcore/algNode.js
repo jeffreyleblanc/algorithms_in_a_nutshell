@@ -33,8 +33,8 @@
 			postInitialize : function(){var Q=this;
 				//-- Make a popup text
 					Q.txt = new j$();
-					Q.txt.$e.css({"position":"absolute","font-size":"12px"})
-						.addClass("rokkit");
+					Q.txt.$e.css({"position":"absolute"})
+						.addClass("graphAnalysis");
 					Q.txt.hide();
 					Q.addC( Q.txt, false );
 					Q.txt.$e.html( "YAK" );
@@ -97,8 +97,11 @@
 				Q.a_setColor();
 				Q.a_render();
 
-				if( Q.txt.visible)
-					Q.txt.$e.xy( Q.localToScreen().addN(vVec(-Q.P.radius,-2*Q.P.radius )) );
+				if( Q.txt.visible){
+					var h = Q.txt.$e.h();
+					var w = Q.txt.$e.w();
+					Q.txt.$e.xy( Q.localToScreen().addN(vVec( -w/2 ,-2*Q.P.radius-h/2 )) );
+				}
 			},
 
 			a_setColor : function(){var Q=this;
@@ -114,25 +117,15 @@
 
 			a_render : function(){var Q=this
 
-				// Render Text
+				// Render ID
 				this.ctx.fillStyle = 'White';
-
-				/*
-				//Depth First
-				if( Q.pred == null )
-					Q.ctx.fillText(Q.a_id+ ' # '+Q.finished,0,0);
-				else
-					Q.ctx.fillText(Q.a_id+' > '+Q.pred.a_id+ ' # '+Q.finished,0,0);
-				*/
-
-				// Breadth First
-				if( Q.A.pred == null )
-					Q.ctx.fillText(Q.A.id+ ' # '+Q.A.dist,0,0);
-				else
-					Q.ctx.fillText(Q.A.id+' > '+Q.A.pred.A.id+ ' # '+Q.A.dist,0,0);
-
+				Q.ctx.fillText(Q.A.id,(Q.A.id>9?-4:-2),2);
 			},
 
+			setMetaText : function( str ){var Q=this;
+
+				Q.txt.$e.html( str );
+			},
 
 		//-- Events ---------------------------------//
 

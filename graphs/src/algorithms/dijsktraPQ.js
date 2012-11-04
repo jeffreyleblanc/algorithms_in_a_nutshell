@@ -35,4 +35,14 @@ function dijsktraPQ( graph, s, e ){
 
 		});
 	}
+
+	// After Run
+	$.each( V, function(i,v){
+		v.setMetaText(
+			v.A.pred != null ?
+			'pred : ' + v.A.pred.A.id + '<br>dist: '+ Math.roundFloat( v.A.dist, 2 )
+			:
+			'pred : NULL' + '<br>dist: '+ Math.roundFloat( v.A.dist, 2 )
+		);
+	});
 }

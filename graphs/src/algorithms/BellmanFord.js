@@ -38,4 +38,14 @@ function bellmanFord( graph, s ){
 			}
 		});
 	}
+
+	// Show results
+	$.each( V, function(i,v){
+		v.setMetaText(
+			v.A.pred != null ?
+			'pred : ' + v.A.pred.A.id + '<br>dist: '+ Math.roundFloat( v.A.dist )
+			:
+			'pred : NULL' + '<br>dist: '+ Math.roundFloat( v.A.dist )
+		);
+	});
 }

@@ -156,16 +156,16 @@
 
 			// WIRE ANALYSIS
 			$('#dfs').click(function(){
-				depthFirstSearch( graph, graph.focus );
+				depthFirstSearch( graph, graph.source() );
 			});
 			$('#bfs').click(function(){
-				breadthFirstSearch( graph, graph.focus );
+				breadthFirstSearch( graph, graph.source() );
 			});
 			$('#dPQ').click(function(){
-				dijsktraPQ( graph, graph.focus, null );
+				dijsktraPQ( graph, graph.source(), null );
 			});
 			$('#bf').click(function(){
-				bellmanFord( graph, graph.focus );
+				bellmanFord( graph, graph.source() );
 			});
 			$('#mst').click(function(){
 				primMST( graph );
@@ -193,12 +193,7 @@
 					});
 				}
 			});
-			$('#reset_color').click(function(){
-				graph.eachEdges( function(i,e){
-					e.color.RGBA(50,100,100,0.5);
-				});
-			});
-			
+
 		});
 		
 </script>
@@ -209,38 +204,43 @@
 <body>
 
 <!-- UI -->
+
 	<span id="state">
-	STATE: 
-	<span id="interact">interact</span> |
-	<span id="link">link</span> |
-	<span id="del">delete</span> |
+	<span class='left-title'> Edit </span> 
+	<span id="interact" class="btn">interact</span> |
+	<span id="link" class="btn">link</span> |
+	<span id="del" class="btn">delete</span> |
 	</span>
-	JSON:
-	<span id="clear">empty graph</span> |
-	<span id="popjson">pop json</span> |
-	<span id="popjsonpretty">pop json pretty</span> |
-	<input id="jsonEntry" type="text"> |
-	<span id="loadjson">load json</span>  |
-	INSPECTOR:
-	<span id="inspector">show</span>
+	inspector <span id="inspector">show</span>
+	
+	<br>
+	<span class='left-title'> Json </span>
+	<input class="inspectff" id="jsonEntry" type="text" > |
+	<span id="loadjson" class="btn">load json</span>  |
+	<span id="popjson" class="btn">pop json</span> |
+	<span id="popjsonpretty" class="btn">pop json pretty</span> |
+
 
 	<br>
-	<span id="example">ExampleGraph</span> | 
-	<span id="dfs">DFS</span> | 
-	<span id="bfs">BFS</span> | 
-	<span id="dPQ">DijisktraPQ</span> | 
-	<span id="bf">BellmanFord</span> |
-	<span id="mst">primMST</span> | 
-	<span id="fw">FloydWarshall</span> || 
-	<span id="set_source">setSource</span> |
-	<span id="set_sink">setSink</span> |
-	<span id="path">PATH!</span> |
-	<span id="reset_color">Reset Color</span>
+	<span class='left-title'> Graphs </span>
+	<span id="example" class="btn">ExampleGraph</span> |
+	<span id="clear" class="btn">empty graph</span> |
+	
+	<br>
+	<span class='left-title'> Algorithms </span>
+	<span id="dfs" class="btn">DFS</span> | 
+	<span id="bfs" class="btn">BFS</span> | 
+	<span id="dPQ" class="btn">DijisktraPQ</span> | 
+	<span id="bf" class="btn">BellmanFord</span> |
+	<span id="mst" class="btn">primMST</span> | 
+	<span id="fw" class="btn">FloydWarshall</span> |
+	<span id="path" class="btn">ShowPath</span> |
 
 <!-- Canvas -->
-	<div id="fps">fps</div>
+	
 	<div id="holder"></div> <!-- Holds the Inspector -->
 	<canvas id='pad' width='800' height='600'></canvas>	
+	<div id="fps">fps</div>
 	
 </body> 
 </html> 

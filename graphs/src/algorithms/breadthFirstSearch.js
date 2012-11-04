@@ -30,4 +30,14 @@ function breadthFirstSearch( graph, s ){
 		Q.pop();
 		u.A.color = 'K';
 	}
+
+	// Show results
+	$.each( V, function(i,v){
+		v.setMetaText(
+			v.A.pred != null ?
+			'pred : ' + v.A.pred.A.id + '<br>dist: '+v.A.dist 
+			:
+			'pred : NULL' + '<br>dist: '+v.A.dist
+		);
+	});
 }
