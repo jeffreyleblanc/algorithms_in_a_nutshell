@@ -24,22 +24,16 @@
 					Q.A.finished = -1;			// done finding
 					Q.A.color = '-'; 			//'W', 'G', 'K' : color, used to mark in searching
 					Q.A.dist = 0;				// distance calculations
-
-
-				
-				
 			},
 
 			postInitialize : function(){var Q=this;
 				//-- Make a popup text
 					Q.txt = new j$();
 					Q.txt.$e.css({"position":"absolute"})
-						.addClass("graphAnalysis");
+						.addClass("graphAnalysis")
+						.html( "---" );
 					Q.txt.hide();
 					Q.addC( Q.txt, false );
-					Q.txt.$e.html( "YAK" );
-				//var w = 0.5*( Q.txt.$e.w() );
-				//.addN(vVec(w,-20))) );
 			},
 			
 			del : function(){ var Q=this;
@@ -88,15 +82,12 @@
 				return resulte;
 			},
 
-
-
 		//-- Render -------------------------------------------//
 			
 			render : function(){ var Q=this;
 				Q.$super();				
-				Q.a_setColor();
-				Q.a_render();
-
+				Q.setAcolor();
+				Q.renderAid();
 				if( Q.txt.visible){
 					var h = Q.txt.$e.h();
 					var w = Q.txt.$e.w();
@@ -104,7 +95,8 @@
 				}
 			},
 
-			a_setColor : function(){var Q=this;
+			//! Shouldn't be done every loop
+			setAcolor : function(){var Q=this;
 				if( Q.A.color == 'W' )
 					Q.P.fillcolor.RGBA(255,255,255,0.75);
 				if( Q.A.color == 'G' )
@@ -115,28 +107,22 @@
 					Q.P.fillcolor.RGBA(0,0,200,0.5);
 			},
 
-			a_render : function(){var Q=this
-
-				// Render ID
+			renderAid : function(){var Q=this;
 				this.ctx.fillStyle = 'White';
 				Q.ctx.fillText(Q.A.id,(Q.A.id>9?-4:-2),2);
 			},
 
 			setMetaText : function( str ){var Q=this;
-
 				Q.txt.$e.html( str );
 			},
 
 		//-- Events ---------------------------------//
 
-			// For some reason this is not inherited properlly....
+			// For some reason this is not inherited properly....
 			eventDefaults : function(){return {
 
 				mousedown : function( evt ){var Q=this;
-					//-- could do setFocus...
 					Q.cnvs.inspector.attach(Q);
-
-					//! FOR ANALYSIS
 					Q.U.graph.setFocus( Q );
 				},
 
@@ -156,11 +142,11 @@
 				},
 
 				mouseenter : function( evt ){var Q=this;
-					Q.txt.show(); //$e.fadeIn(100);
+					Q.txt.show();
 				},
 
 				mouseleave : function( evt ){var Q=this;
-					Q.txt.hide(); //$e.fadeOut(100);
+					Q.txt.hide(); 
 				},
 
 			}}

@@ -12,5 +12,5 @@ function Queue () {
     };
     this.empty = function(){
     	return this.Q.length == 0;
-    }
-}
+    };
+};

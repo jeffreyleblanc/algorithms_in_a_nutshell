@@ -1,12 +1,14 @@
 
 function bellmanFord( graph, s ){
 
+	// 1. Check we have proper pointers
 	if( s == null ){ $.C('No source defined!');return; }
 	else $.C('Runnning on '+graph.id()+' '+s.id());
 
-	// Ready
-	graph.resetColors();
+	// 2. Reset
+	graph.resetAnalysis();
 
+	// 3. Setup for analysis
 	var V = graph.U.nodes.cO.L;
 	var E = graph.U.edges.cO.L;
 
@@ -16,7 +18,7 @@ function bellmanFord( graph, s ){
 	});
 	s.A.dist = 0;
 
-	//! check implementation
+	// 4. Run //! check implementation
 	var n = V.length;
 	for( var i=1; i<n; i++ ){
 		$.C( 'pass : '+ i);
@@ -24,7 +26,7 @@ function bellmanFord( graph, s ){
 			var v = e.n1();
 			var u = e.n2();
 			
-			var newLen = u.A.dist + e.currDist;
+			var newLen = u.A.dist + e.getDist();
 			if( newLen < v.A.dist ){
 				if( i == n )
 					$.C( "NEGATIVE CYCLE" );
@@ -32,7 +34,7 @@ function bellmanFord( graph, s ){
 				v.A.pred = u;
 			}
 
-			newLen = v.A.dist + e.currDist;
+			newLen = v.A.dist + e.getDist();
 			if( newLen < u.A.dist ){
 				if( i == n )
 					$.C( "NEGATIVE CYCLE" );
@@ -42,7 +44,7 @@ function bellmanFord( graph, s ){
 		});
 	}
 
-	// Show results
+	// 5. Output Results
 	$.each( V, function(i,v){
 		v.setMetaText(
 			v.A.pred != null ?

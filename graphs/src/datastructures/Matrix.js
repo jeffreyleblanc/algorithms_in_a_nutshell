@@ -4,7 +4,7 @@ function algMatrix(){
     return new arguments.callee(); 
 
    this.E = null; // in theory this could be rolled into a init function...
-}
+};
 
 algMatrix.prototype =  {
 

@@ -1,12 +1,14 @@
 
 function breadthFirstSearch( graph, s ){
 
+	// 1. Check we have proper pointers
 	if( s == null ){ $.C('No source defined!');return; }
 	else $.C('Runnning on '+graph.id()+' '+s.id());
 
-	// Ready
-	graph.resetColors();
+	// 2. Reset
+	graph.resetAnalysis();
 
+	// 3. Setup for analysis
 	var V = graph.U.nodes.cO.L;
 	$.each( V, function(i,v){
 		v.A.pred = null;
@@ -17,6 +19,7 @@ function breadthFirstSearch( graph, s ){
 	s.A.color = 'G';
 	s.A.dist = 0;
 
+	// 4. Run
 	Q = new Queue();
 	Q.enqueue( s );
 	while( ! Q.empty() ){
@@ -34,7 +37,7 @@ function breadthFirstSearch( graph, s ){
 		u.A.color = 'K';
 	}
 
-	// Show results
+	// 5. Output Results
 	$.each( V, function(i,v){
 		v.setMetaText(
 			v.A.pred != null ?

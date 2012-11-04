@@ -1,10 +1,10 @@
 
 function primMST( graph ){
 
-	// Ready
-	graph.resetColors();
+	// 2. Reset
+	graph.resetAnalysis();
 
-	// Setup
+	// 3. Setup for analysis
 	var V = graph.U.nodes.cO.L;
 	$.each( V, function(i,v){
 		v.A.pred = null;
@@ -17,7 +17,7 @@ function primMST( graph ){
 		PQ.push( v, v.A.dist );
 	});
 	
-	// Run
+	// 4. Run
 	while( ! PQ.empty() ){
 		var u = PQ.popMin();
 		N = u.getLinkedNodes();
@@ -26,7 +26,7 @@ function primMST( graph ){
 			if( PQ.includes( v )){
 				var e = u.getLinkingEdgeByPtr( v );
 				$.C( e.id() );
-				var w = e.currDist;
+				var w = e.getDist();
 				if( w < v.A.dist ){
 					v.A.pred = u;
 					v.A.dist = w;
@@ -37,11 +37,11 @@ function primMST( graph ){
 		});
 	}
 
-	// Display Results
+	// 5. Output Results
 	$.each( V, function(i,v){
 		if( v.A.pred != null ){
 			var e = v.getLinkingEdgeByPtr( v.A.pred );
 			e.color.RGBA(255,255,0,0.75);
 		}
 	});
-}
+};

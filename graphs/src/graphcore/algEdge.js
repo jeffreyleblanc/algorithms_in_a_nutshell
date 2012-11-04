@@ -16,12 +16,16 @@
 			initialize : function(){var Q=this;
 				Q.$super();
 
+				Q.useCurrDist = true;
+				Q._dist = 1; // used if above is false
+
 			},
 
-		//== Analysis =====================================================//
-		
-		///-- Packets ----------------------------------------///
-		
+		//-- distance ------------------------------------------------//
+
+			getDist : function(){
+				return ( this.useCurrDist ? this.currDist : this._dist );
+			}
 			
 	});
 

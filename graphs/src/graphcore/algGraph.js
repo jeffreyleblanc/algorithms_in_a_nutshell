@@ -20,44 +20,20 @@
 					Q.indexToPtr = [];
 					Q.predMatrix = null;
 					Q.distMatrix = null;
-				/// move to aGraph
+				//-- Sink and Source
 					Q.U._s = null; // sink node;
 					Q.U._t = null; // target node;
-
 					Q.nrSource = null;
 					Q.nrSink = null;
 			},
 
 			postInitialize : function(){var Q=this;
 				Q.$super();
-				// Make the nodeRings
-				Q.nrSource = new algNodeRing();
-				Q.nrSource.graph = Q;
-				Q.nrSource.tgt = 'source';
-				Q.addC( Q.nrSource, false );
-				Q.nrSource.pos( vVec(35,35) );
-				Q.nrSource.P.strokecolor = new vColor(0, 200, 0, 0.5);
-				
-				Q.nrSink = new algNodeRing();
-				Q.nrSink.graph = Q;
-				Q.nrSink.tgt = 'sink';
-				Q.addC( Q.nrSink, false );
-				Q.nrSink.pos( vVec(100,35) );
-				Q.nrSink.P.strokecolor = new vColor(200, 0, 0, 0.5);
-
-
-
+				Q.makeRings();
 			},
 
 			postLink : function(){var Q=this;
-				if( Q.U._s != null ){
-					Q.nrSource.node = Q.U._s;
-					Q.nrSource.locked = true;
-				}
-				if( Q.U._t != null ){
-					Q.nrSink.node = Q.U._t;
-					Q.nrSink.locked = true;
-				}
+				Q.linkRings();
 			},
 
 			del : function(){var Q=this;
@@ -72,10 +48,45 @@
 				this.$super();
 			},
 
-			resetColors : function(){var Q=this;
+		//-- reset --------------------------------------------//
+
+			resetAnalysis : function(){var Q=this;
 				Q.eachEdges( function(i,e){
 					e.color.RGBA(50,100,100,0.5);
 				});
+				Q.eachNodes( function(i,n){
+					n.A.color = '-'; 
+					n.P.fillcolor.RGBA(0,0,200,0.5);
+				});
+			},
+
+		//-- Source and Sink --------------------------------------------//
+
+			makeRings : function(){var Q=this;
+				Q.nrSource = new algNodeRing();
+				Q.nrSource.graph = Q;
+				Q.nrSource.tgt = 'source';
+				Q.addC( Q.nrSource, false );
+				Q.nrSource.pos( vVec(35,35) );
+				Q.nrSource.P.strokecolor = new vColor(0, 200, 0, 0.5);
+				
+				Q.nrSink = new algNodeRing();
+				Q.nrSink.graph = Q;
+				Q.nrSink.tgt = 'sink';
+				Q.addC( Q.nrSink, false );
+				Q.nrSink.pos( vVec(100,35) );
+				Q.nrSink.P.strokecolor = new vColor(200, 0, 0, 0.5);
+			},
+
+			linkRings : function(){var Q=this;
+				if( Q.U._s != null ){
+					Q.nrSource.node = Q.U._s;
+					Q.nrSource.locked = true;
+				}
+				if( Q.U._t != null ){
+					Q.nrSink.node = Q.U._t;
+					Q.nrSink.locked = true;
+				}
 			},
 
 		//== Analysis =====================================================//
