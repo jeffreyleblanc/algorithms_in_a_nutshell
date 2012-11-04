@@ -141,13 +141,13 @@
 			render : function(){ var Q=this;
 				Q.$super();
 
-				// Render focuses
-				if( Q.U._s !=  null ){
+				// Render focuses //! we are using rings now
+				/*if( Q.U._s !=  null ){
 					Q.rndr.circle( Q.U._s.pos() ,30,null,'green',3);
 				}
 				if( Q.U._t !=  null ){
 					Q.rndr.circle( Q.U._t.pos() ,30,null,'yellow',3);
-				}
+				}*/
 			},
 
 		//-- Contains --------------------------------//
